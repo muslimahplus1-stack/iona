@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IONA — Konten Islam yang Murni</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink-50: #fff0f5;
+    --pink-100: #ffd6e7;
+    --pink-200: #ffadd0;
+    --pink-300: #ff80b5;
+    --pink-400: #ff4d94;
+    --pink-500: #f72b78;
+    --pink-600: #d91a62;
+    --pink-700: #b5124e;
+    --pink-800: #8a0e3b;
+    --pink-900: #5e0828;
+
+    --bg: #0a0408;
+    --bg2: #130b10;
+    --bg3: #1c1018;
+    --surface: #241520;
+    --surface2: #2e1c2b;
+    --border: rgba(247,43,120,0.15);
+    --border2: rgba(247,43,120,0.3);
+    --text: #fff0f5;
+    --text2: rgba(255,240,245,0.65);
+    --text3: rgba(255,240,245,0.35);
+    --accent: #f72b78;
+    --accent2: #ff80b5;
+    --glow: rgba(247,43,120,0.25);
+    --glow2: rgba(247,43,120,0.08);
+
+    --r: 16px;
+    --r2: 24px;
+    --r3: 40px;
+
+    /* Advanced adaptive shadows */
+    --nav-shadow: 0 4px 40px rgba(0,0,0,0.4);
+    --shadow-featured: 0 0 50px rgba(247,43,120,0.15), 0 20px 60px rgba(0,0,0,0.3);
+    --shadow-featured-hover: 0 0 70px rgba(247,43,120,0.25), 0 30px 80px rgba(0,0,0,0.4);
+  }
+
+  [data-theme="light"] {
+    --bg: #fdfafb;
+    --bg2: #f6edf1;
+    --bg3: #ebdee3;
+    --surface: #ffffff;
+    --surface2: #faf0f4;
+    --border: rgba(247,43,120,0.12);
+    --border2: rgba(247,43,120,0.22);
+    --text: #1a0510;
+    --text2: rgba(26,5,16,0.65);
+    --text3: rgba(26,5,16,0.35);
+	--accent: #d91a62;
+    --accent2: #b5124e;
+    --glow: rgba(247,43,120,0.15);
+    --glow2: rgba(247,43,120,0.05);
+
+    /* Soft, elegant shadows for light mode */
+    --nav-shadow: 0 4px 30px rgba(247,43,120,0.05), 0 4px 20px rgba(0,0,0,0.02);
+    --shadow-featured: 0 15px 45px rgba(247,43,120,0.08), 0 5px 15px rgba(0,0,0,0.03);
+    --shadow-featured-hover: 0 25px 55px rgba(247,43,120,0.14), 0 10px 25px rgba(0,0,0,0.05);
+  }
+
+  [data-theme="light"] footer {
+    --text2: rgba(26,5,16,0.85);
+    --text3: rgba(26,5,16,0.6);
+  }
+
+ [data-theme="light"] .footer-brand .footer-logo {
+    background: linear-gradient(135deg, var(--pink-500), var(--pink-800));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  [data-theme="light"] .nav-logo {
+    background: linear-gradient(135deg, var(--pink-500), var(--pink-700), var(--pink-900));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  [data-theme="light"] .hero-title span {
+    background: linear-gradient(135deg, var(--pink-500) 0%, var(--pink-700) 50%, var(--pink-900) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  [data-theme="light"] .vision-center .big-letter {
+    background: linear-gradient(135deg, var(--pink-500), var(--pink-800));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* ─── NOISE TEXTURE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.35;
+  }
+
+  /* ─── AMBIENT BLOBS ─── */
+  .blob-container {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.18;
+    animation: drift 20s ease-in-out infinite alternate;
+  }
+  [data-theme="light"] .blob { opacity: 0.22; }
+  .blob-1 { width: 600px; height: 600px; background: var(--pink-400); top: -200px; right: -100px; animation-delay: 0s; }
+  .blob-2 { width: 400px; height: 400px; background: var(--pink-600); bottom: 20%; left: -150px; animation-delay: -7s; }
+  .blob-3 { width: 300px; height: 300px; background: var(--pink-300); top: 40%; right: 20%; animation-delay: -14s; }
+
+  @keyframes drift {
+    from { transform: translate(0,0) scale(1); }
+    to { transform: translate(40px,60px) scale(1.05); }
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 0 5%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    backdrop-filter: blur(20px) saturate(1.5);
+    -webkit-backdrop-filter: blur(20px) saturate(1.5);
+    background: rgba(10,4,8,0.7);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.3s;
+  }
+  [data-theme="light"] nav { background: rgba(253, 250, 251, 0.8); }
+
+ .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.6rem;
+    letter-spacing: 0.12em;
+    background: linear-gradient(135deg, var(--pink-200), var(--pink-400), var(--pink-600));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; align-items: center; }
+  .nav-links a {
+    color: var(--text2);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent2); }
+  .nav-right { display: flex; align-items: center; gap: 1rem; }
+
+  .btn-outline {
+    padding: 0.45rem 1.2rem;
+    border: 1px solid var(--border2);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--text2);
+    font-size: 0.8rem;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent2); background: var(--glow2); }
+
+  .btn-primary {
+    padding: 0.5rem 1.4rem;
+    border: none;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--pink-500), var(--pink-700));
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.25s;
+    text-decoration: none;
+    display: inline-block;
+    box-shadow: 0 0 20px var(--glow);
+  }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 0 35px var(--glow), 0 4px 20px rgba(0,0,0,0.3); }
+
+  .theme-toggle {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--border2);
+    background: transparent;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text2);
+    font-size: 1rem;
+    transition: all 0.2s;
+  }
+  .theme-toggle:hover { border-color: var(--accent); color: var(--accent2); }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 5px;
+  }
+  .hamburger span {
+    width: 24px; height: 2px;
+    background: var(--text2);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+
+  /* ─── MOBILE MENU ─── */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 70px; left: 0; right: 0;
+    z-index: 999;
+    padding: 1.5rem 5%;
+    backdrop-filter: blur(20px);
+    background: rgba(10,4,8,0.95);
+    border-bottom: 1px solid var(--border);
+    flex-direction: column;
+    gap: 1rem;
+  }
+  [data-theme="light"] .mobile-menu { background: rgba(253, 250, 251, 0.97); }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { color: var(--text2); text-decoration: none; font-size: 1rem; padding: 0.5rem 0; border-bottom: 1px solid var(--border); }
+
+  /* ─── HERO ─── */
+  .hero {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 5% 80px;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--border2);
+    background: var(--glow2);
+    font-size: 0.75rem;
+    color: var(--accent2);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    animation: fadeDown 0.8s ease both;
+  }
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+    animation: pulse 2s ease infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4rem, 12vw, 9rem);
+    font-weight: 300;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.3em;
+    animation: fadeDown 0.8s 0.1s ease both;
+  }
+  .hero-title span {
+    font-style: italic;
+    background: linear-gradient(135deg, var(--pink-200) 0%, var(--pink-400) 50%, var(--pink-600) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: block;
+  }
+
+  .hero-sub {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(0.7rem, 2vw, 0.9rem);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 1.5rem;
+    animation: fadeDown 0.8s 0.2s ease both;
+  }
+
+  .hero-desc {
+    max-width: 520px;
+    font-size: 1rem;
+    color: var(--text2);
+    line-height: 1.75;
+    margin-bottom: 2.5rem;
+    animation: fadeDown 0.8s 0.3s ease both;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeDown 0.8s 0.4s ease both;
+  }
+
+  .btn-xl {
+    padding: 0.85rem 2rem;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    text-decoration: none;
+    transition: all 0.25s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .btn-xl.primary {
+    background: linear-gradient(135deg, var(--pink-400), var(--pink-700));
+    color: #fff;
+    border: none;
+    box-shadow: 0 0 30px var(--glow), 0 0 80px rgba(247,43,120,0.1);
+  }
+  .btn-xl.primary:hover { transform: translateY(-2px); box-shadow: 0 0 50px var(--glow), 0 8px 30px rgba(0,0,0,0.4); }
+  .btn-xl.ghost {
+    background: transparent;
+    color: var(--text2);
+    border: 1px solid var(--border2);
+  }
+  .btn-xl.ghost:hover { border-color: var(--accent); color: var(--accent2); background: var(--glow2); }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── SCROLL HINT ─── */
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text3);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    animation: fadeUp 1s 1s ease both;
+  }
+  .scroll-hint::after {
+    content: '';
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    animation: scrollLine 2s ease-in-out infinite;
+  }
+  @keyframes scrollLine { 0%,100%{opacity:0.3; transform:scaleY(1)} 50%{opacity:1; transform:scaleY(0.5)} }
+
+  /* ─── SECTION BASE ─── */
+  section { position: relative; z-index: 1; padding: 6rem 5%; }
+  .section-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 1.2rem;
+  }
+  .section-title em { font-style: italic; color: var(--accent2); }
+  .section-desc { font-size: 1rem; color: var(--text2); line-height: 1.8; max-width: 500px; }
+
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── PHONE MOCKUP SECTION ─── */
+  .phones-section {
+    padding: 4rem 5% 6rem;
+    overflow: hidden;
+  }
+  .phones-header { text-align: center; margin-bottom: 4rem; }
+  .phones-header .section-desc { max-width: 560px; margin: 0 auto; }
+
+  .phone-carousel-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+  .phone-carousel {
+    display: flex;
+    gap: 1.5rem;
+    width: max-content;
+    animation: slideLeft 30s linear infinite;
+    padding: 2rem 0;
+  }
+  .phone-carousel:hover { animation-play-state: paused; }
+  @keyframes slideLeft {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .phone-frame {
+    width: 180px;
+    height: 320px;
+    flex-shrink: 0;
+    border-radius: 28px;
+    border: 2px solid var(--border2);
+    overflow: hidden;
+    position: relative;
+    background: var(--surface);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(247,43,120,0.1), inset 0 0 30px rgba(247,43,120,0.03);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    transform: perspective(800px) rotateY(-5deg) rotateX(3deg);
+  }
+  .phone-frame:hover {
+    transform: perspective(800px) rotateY(0deg) rotateX(0deg) scale(1.04) translateY(-8px);
+    box-shadow: 0 40px 80px rgba(0,0,0,0.5), 0 0 40px var(--glow);
+  }
+  .phone-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .phone-frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 60%, rgba(247,43,120,0.15) 100%);
+    pointer-events: none;
+  }
+
+  /* ─── FEATURES GRID ─── */
+  .features-section { padding: 6rem 5%; }
+  .features-header { margin-bottom: 3.5rem; }
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  .feature-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r2);
+    padding: 1.75rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.35s ease;
+    cursor: default;
+  }
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, var(--glow2) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .feature-card:hover::before { opacity: 1; }
+  .feature-card:hover {
+    border-color: var(--border2);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 30px var(--glow2);
+  }
+
+  .feature-icon {
+    width: 48px; height: 48px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--pink-500), var(--pink-800));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 0 20px rgba(247,43,120,0.3);
+    position: relative;
+  }
+
+  .feature-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+    color: var(--text);
+  }
+  .feature-tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+  }
+  .feature-desc { font-size: 0.875rem; color: var(--text2); line-height: 1.65; }
+
+  /* ─── TANYA AI ─── */
+  .ai-section { padding: 6rem 5%; }
+  .ai-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .ai-cards { display: flex; flex-direction: column; gap: 1rem; }
+  .ai-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r2);
+    padding: 1.5rem;
+    display: flex;
+    gap: 1.2rem;
+    align-items: flex-start;
+    transition: all 0.3s;
+    cursor: default;
+  }
+  .ai-card:hover { border-color: var(--border2); transform: translateX(6px); }
+  .ai-card.active { border-color: var(--accent); box-shadow: 0 0 30px var(--glow2), inset 0 0 40px rgba(247,43,120,0.02); }
+  .ai-icon {
+    width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+  }
+  .ai-icon.sun { background: linear-gradient(135deg,#f72b78,#8a0e3b); }
+  .ai-icon.star { background: linear-gradient(135deg,#7c3aed,#4f1d9b); }
+  .ai-icon.heart { background: linear-gradient(135deg,#ec4899,#be185d); }
+  .ai-card-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem; margin-bottom: 0.3rem; }
+  .ai-card-role { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 0.5rem; font-weight: 600; }
+  .ai-card-desc { font-size: 0.85rem; color: var(--text2); line-height: 1.6; }
+
+  /* ─── PRICING ─── */
+  .pricing-section { padding: 6rem 5%; }
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    max-width: 900px;
+    margin: 3rem auto 0;
+  }
+  .pricing-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r2);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+  .pricing-card.featured {
+    border-color: var(--accent);
+    background: linear-gradient(160deg, var(--surface2) 0%, var(--surface) 100%);
+    box-shadow: var(--shadow-featured);
+  }
+  .pricing-card:hover { transform: translateY(-6px); }
+  .pricing-card.featured:hover { box-shadow: var(--shadow-featured-hover); }
+
+  .pricing-badge {
+    display: inline-block;
+    padding: 0.25rem 0.8rem;
+    border-radius: 999px;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+  }
+  .badge-premium { background: rgba(247,43,120,0.12); color: var(--accent2); border: 1px solid var(--border2); }
+  .badge-exclusive { background: linear-gradient(135deg, var(--pink-500), var(--pink-700)); color: #fff; }
+  .badge-trial { background: rgba(255,255,255,0.08); color: var(--text3); border: 1px solid var(--border); }
+
+  .pricing-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    margin-bottom: 0.5rem;
+  }
+ .pricing-price {
+   font-family: 'DM Sans', sans-serif;
+   font-size: 2.4rem;
+   font-weight: 500;
+   color: var(--accent);
+   margin-bottom: 0.2rem;
+   line-height: 1;
+ }
+  .pricing-period { font-size: 0.8rem; color: var(--text3); margin-bottom: 1.5rem; }
+  .pricing-divider { height: 1px; background: var(--border); margin-bottom: 1.5rem; }
+
+  .pricing-features { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; margin-bottom: 2rem; }
+  .pricing-features li {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.875rem;
+    color: var(--text2);
+  }
+  .pricing-features li::before {
+    content: '';
+    width: 16px; height: 16px; flex-shrink: 0;
+    border-radius: 50%;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8l3.5 3.5L13 5' stroke='white' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / cover, linear-gradient(135deg, var(--pink-500), var(--pink-700));
+    display: flex; align-items: center; justify-content: center;
+  }
+  .pricing-features li.no::before {
+    background: var(--surface2);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 4l8 8M12 4l-8 8' stroke='%23666' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-size: cover;
+  }
+  .pricing-features li.no { color: var(--text3); }
+
+  .pricing-cta {
+    width: 100%;
+    padding: 0.85rem;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: all 0.25s;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+  }
+  .cta-solid { background: linear-gradient(135deg, var(--pink-400), var(--pink-700)); color: #fff; border: none; box-shadow: 0 0 20px var(--glow); }
+  .cta-solid:hover { box-shadow: 0 0 40px var(--glow); transform: translateY(-2px); }
+  .cta-outline { background: transparent; border: 1px solid var(--border2); color: var(--text2); }
+  .cta-outline:hover { border-color: var(--accent); color: var(--accent2); }
+
+  .featured-ribbon {
+    position: absolute;
+    top: 16px;
+    right: -24px;
+    background: linear-gradient(135deg, var(--pink-400), var(--pink-700));
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.3rem 2.5rem;
+    transform: rotate(35deg);
+  }
+
+  /* ─── MARQUEE ─── */
+  .marquee-section {
+    padding: 3rem 0;
+    overflow: hidden;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--bg2);
+  }
+  .marquee-track {
+    display: flex;
+    gap: 3rem;
+    width: max-content;
+    animation: marquee 20s linear infinite;
+  }
+  .marquee-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    white-space: nowrap;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text3);
+  }
+  .marquee-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+  @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+  /* ─── STATS ─── */
+  .stats-section {
+    padding: 5rem 5%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 2rem;
+    text-align: center;
+  }
+  .stat-item { padding: 2rem; }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 700;
+    line-height: 1;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+  }
+  .stat-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text2);
+    letter-spacing: 0.03em;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    position: relative;
+    z-index: 1;
+    padding: 4rem 5% 2rem;
+    border-top: 1px solid var(--border);
+    background: var(--bg2);
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+  .footer-brand .footer-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.8rem;
+    letter-spacing: 0.1em;
+    background: linear-gradient(135deg, var(--pink-200), var(--pink-500));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: block;
+    margin-bottom: 1rem;
+  }
+  .footer-brand p { font-size: 0.875rem; color: var(--text2); line-height: 1.7; max-width: 280px; }
+
+  .footer-col h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 1.2rem;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .footer-col ul li a { font-size: 0.875rem; color: var(--text2); text-decoration: none; transition: color 0.2s; }
+  .footer-col ul li a:hover { color: var(--accent2); }
+
+  .footer-bottom {
+    border-top: 1px solid var(--border);
+    padding-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .footer-bottom p { font-size: 0.8rem; color: var(--text3); }
+
+  .wa-button {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 900;
+    width: 58px; height: 58px;
+    border-radius: 50%;
+    background: #25d366;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+    transition: all 0.25s;
+    text-decoration: none;
+    animation: popIn 0.5s 2s ease both;
+  }
+  .wa-button:hover { transform: scale(1.1); box-shadow: 0 8px 30px rgba(37,211,102,0.5); }
+  .wa-button svg { width: 28px; height: 28px; fill: #fff; }
+  @keyframes popIn { from{opacity:0;transform:scale(0)} to{opacity:1;transform:scale(1)} }
+
+  /* ─── ABOUT VISION ─── */
+  .vision-section {
+    padding: 6rem 5%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+  .vision-visual {
+    position: relative;
+    height: 500px;
+  }
+  .vision-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid var(--border2);
+    animation: spin linear infinite;
+  }
+  .ring1 { width: 300px; height: 300px; top: 50%; left: 50%; transform: translate(-50%,-50%); animation-duration: 20s; }
+  .ring2 { width: 420px; height: 420px; top: 50%; left: 50%; transform: translate(-50%,-50%); animation-duration: 30s; animation-direction: reverse; border-style: dashed; }
+  .ring3 { width: 500px; height: 500px; top: 50%; left: 50%; transform: translate(-50%,-50%); animation-duration: 45s; }
+  @keyframes spin { to { transform: translate(-50%,-50%) rotate(360deg); } }
+
+  .vision-center {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    z-index: 2;
+  }
+  .vision-center .big-letter {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 8rem;
+    font-weight: 300;
+    font-style: italic;
+    background: linear-gradient(135deg, var(--pink-200), var(--pink-500));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+  }
+
+  .orbit-dot {
+    position: absolute;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 12px var(--accent);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .ai-grid { grid-template-columns: 1fr; }
+    .vision-section { grid-template-columns: 1fr; }
+    .vision-visual { height: 300px; }
+    .ring1 { width: 200px; height: 200px; }
+    .ring2 { width: 270px; height: 270px; }
+    .ring3 { width: 320px; height: 320px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+  }
+  @media (max-width: 600px) {
+    .footer-grid { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+    section { padding: 4rem 5%; }
+    .hero { padding: 100px 5% 60px; }
+  }
+
+  /* ─── GLASSMORPHISM CARD ─── */
+  .glass-card {
+    background: rgba(247,43,120,0.04);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    border-radius: var(--r2);
+  }
+
+  /* ─── GLOW LINE ─── */
+  .glow-line {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    margin: 0 5%;
+    opacity: 0.5;
+  }
+
+  /* ─── COMMUNITY SECTION ─── */
+  .community-section { padding: 6rem 5%; text-align: center; }
+  .community-section .section-title { margin-bottom: 1rem; }
+  .community-section .section-desc { max-width: 480px; margin: 0 auto 2.5rem; }
+
+  .chat-preview {
+    max-width: 360px;
+    margin: 2rem auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    text-align: left;
+  }
+  .chat-bubble {
+    padding: 0.75rem 1rem;
+    border-radius: 16px;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    position: relative;
+    max-width: 80%;
+  }
+  .chat-bubble.right {
+    background: linear-gradient(135deg, var(--pink-500), var(--pink-700));
+    color: #fff;
+    margin-left: auto;
+    border-bottom-right-radius: 4px;
+  }
+  .chat-bubble.left {
+    background: var(--surface2);
+    color: var(--text);
+    border-bottom-left-radius: 4px;
+  }
+  .chat-bubble.left .verified {
+    color: var(--pink-400);
+    font-size: 0.7rem;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 0.2rem;
+  }
+
+  /* Styling verified badge SVG */
+  .verified-badge {
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 4px;
+    margin-top: -2px;
+  }
+</style>
+</style>
+</head>
+<body>
+
+<!-- AMBIENT BLOBS -->
+<div class="blob-container" aria-hidden="true">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+</div>
+
+<!-- WHATSAPP BUTTON -->
+<a href="https://wa.me/6285648545159?text=Assalamu'alaikum%2C%20saya%20ingin%20bertanya%20tentang%20aplikasi%20IONA%20🌸" target="_blank" class="wa-button" aria-label="Chat WhatsApp Cloud Sunnah">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">IONA</a>
+  <div class="nav-links">
+    <a href="#fitur">Fitur</a>
+    <a href="#tanya">AI Tanya</a>
+    <a href="#harga">Harga</a>
+    <a href="#tentang">Tentang</a>
+  </div>
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle tema">🌙</button>
+    <a href="https://wa.me/6285648545159?text=Assalamu'alaikum%2C%20saya%20ingin%20mulai%20berlangganan%20IONA%20🌸" target="_blank" class="btn-primary">Mulai Sekarang</a>
+    <div class="hamburger" id="hamburger" aria-label="Menu" role="button" tabindex="0">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#fitur" onclick="closeMobile()">Fitur</a>
+  <a href="#tanya" onclick="closeMobile()">AI Tanya</a>
+  <a href="#harga" onclick="closeMobile()">Harga</a>
+  <a href="#tentang" onclick="closeMobile()">Tentang</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">Konten Islam yang Murni & Terpercaya</div>
+  <h1 class="hero-title">
+    <span>IONA</span>
+  </h1>
+  <p class="hero-sub">Islamic Online Network App</p>
+  <p class="hero-desc">Platform konten islami yang dikurasi selaras dengan manhaj salaf, Al-Qur'an dan Sunnah. Bersih, terpercaya, dan menentramkan hati.</p>
+  <div class="hero-cta">
+    <a href="#harga" class="btn-xl primary">🌸 Sewa Aplikasi — Mulai Rp5.000</a>
+    <a href="#fitur" class="btn-xl ghost">Lihat Fitur →</a>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-section" aria-hidden="true">
+  <div class="marquee-track">
+    <div class="marquee-item"><div class="marquee-dot"></div> Tap Clipz</div>
+    <div class="marquee-item"><div class="marquee-dot"></div> Pisz</div>
+    <div class="marquee-item"><div class="marquee-dot"></div> Newz</div>
+    <div class="marquee-item"><div class="marquee-dot"></div> Kidz</div>
+    <div class="marquee-item"><div class="marquee-dot"></div> Kuiz</div>
+    <div class="marquee-item"><div class="marquee-dot"></div> TV</div>
+    <div class="marquee-item"><div class="marquee-dot"></div> Kalender</div>
+    <div class="marquee-item"><div class="marquee-dot"></div> Tanya AI</div>
+    <div class="marquee-item"><div class="marquee-dot"></div> Readz</div>
+    <div class="marquee-item"><div class="marquee-dot"></div> Risetz</div>
+    <div class="marquee-item"><div class="marquee-dot"></div> Cookz</div>
+    <!-- Duplicate for seamless loop -->
+    <div class="marquee-item"><div class="marquee-dot"></div> Tap Clipz</div>
+    <div class="marquee-item"><div class="marquee-dot"></div> Pisz</div>
+    <div class="marquee-item"><div class="marquee-dot"></div> Newz</div>
+    <div class="marquee-item"><div class="marquee-dot"></div> Kidz</div>
+    <div class="marquee-item"><div class="marquee-dot"></div> Kuiz</div>
+    <div class="marquee-item"><div class="marquee-dot"></div> TV</div>
+    <div class="marquee-item"><div class="marquee-dot"></div> Kalender</div>
+    <div class="marquee-item"><div class="marquee-dot"></div> Tanya AI</div>
+    <div class="marquee-item"><div class="marquee-dot"></div> Readz</div>
+    <div class="marquee-item"><div class="marquee-dot"></div> Risetz</div>
+    <div class="marquee-item"><div class="marquee-dot"></div> Cookz</div>
+  </div>
+</div>
+
+<!-- PHONE CAROUSEL -->
+<section class="phones-section" id="preview">
+  <div class="phones-header reveal">
+    <p class="section-label">Preview Aplikasi</p>
+    <h2 class="section-title">Tampilan <em>dalam</em> aplikasi</h2>
+    <p class="section-desc">Antarmuka yang bersih, nyaman dipandang, dan memudahkan kamu menyerap konten islami kapan saja.</p>
+  </div>
+  <div class="phone-carousel-wrapper">
+    <div class="phone-carousel">
+      <!-- First set -->
+      <div class="phone-frame"><img src="https://file.garden/aXs8yEzen0_D9Lab/1.jpg" alt="IONA App Screenshot 1" loading="lazy"></div>
+      <div class="phone-frame"><img src="https://file.garden/aXs8yEzen0_D9Lab/2.jpg" alt="IONA App Screenshot 2" loading="lazy"></div>
+      <div class="phone-frame"><img src="https://file.garden/aXs8yEzen0_D9Lab/3z.jpg" alt="IONA App Screenshot 3" loading="lazy"></div>
+      <div class="phone-frame"><img src="https://file.garden/aXs8yEzen0_D9Lab/4z.jpg" alt="IONA App Screenshot 4" loading="lazy"></div>
+      <div class="phone-frame"><img src="https://file.garden/aXs8yEzen0_D9Lab/5z.jpg" alt="IONA App Screenshot 5" loading="lazy"></div>
+      <div class="phone-frame"><img src="https://file.garden/aXs8yEzen0_D9Lab/6z.jpg" alt="IONA App Screenshot 6" loading="lazy"></div>
+      <div class="phone-frame"><img src="https://file.garden/aXs8yEzen0_D9Lab/7z.jpg" alt="IONA App Screenshot 7" loading="lazy"></div>
+      <div class="phone-frame"><img src="https://file.garden/aXs8yEzen0_D9Lab/8z.jpg" alt="IONA App Screenshot 8" loading="lazy"></div>
+      <div class="phone-frame"><img src="https://file.garden/aXs8yEzen0_D9Lab/9z.jpg" alt="IONA App Screenshot 9" loading="lazy"></div>
+      <div class="phone-frame"><img src="https://file.garden/aXs8yEzen0_D9Lab/10z.jpg" alt="IONA App Screenshot 10" loading="lazy"></div>
+      <div class="phone-frame"><img src="https://file.garden/aXs8yEzen0_D9Lab/11z.jpg" alt="IONA App Screenshot 11" loading="lazy"></div>
+      <div class="phone-frame"><img src="https://file.garden/aXs8yEzen0_D9Lab/12.jpg" alt="IONA App Screenshot 12" loading="lazy"></div>
+      <div class="phone-frame"><img src="https://file.garden/aXs8yEzen0_D9Lab/13z.jpg" alt="IONA App Screenshot 13" loading="lazy"></div>
+      <!-- Duplicate for seamless loop -->
+      <div class="phone-frame"><img src="https://file.garden/aXs8yEzen0_D9Lab/1.jpg" alt="" loading="lazy" aria-hidden="true"></div>
+      <div class="phone-frame"><img src="https://file.garden/aXs8yEzen0_D9Lab/2.jpg" alt="" loading="lazy" aria-hidden="true"></div>
+      <div class="phone-frame"><img src="https://file.garden/aXs8yEzen0_D9Lab/3z.jpg" alt="" loading="lazy" aria-hidden="true"></div>
+      <div class="phone-frame"><img src="https://file.garden/aXs8yEzen0_D9Lab/4z.jpg" alt="" loading="lazy" aria-hidden="true"></div>
+      <div class="phone-frame"><img src="https://file.garden/aXs8yEzen0_D9Lab/5z.jpg" alt="" loading="lazy" aria-hidden="true"></div>
+      <div class="phone-frame"><img src="https://file.garden/aXs8yEzen0_D9Lab/6z.jpg" alt="" loading="lazy" aria-hidden="true"></div>
+      <div class="phone-frame"><img src="https://file.garden/aXs8yEzen0_D9Lab/7z.jpg" alt="" loading="lazy" aria-hidden="true"></div>
+      <div class="phone-frame"><img src="https://file.garden/aXs8yEzen0_D9Lab/8z.jpg" alt="" loading="lazy" aria-hidden="true"></div>
+      <div class="phone-frame"><img src="https://file.garden/aXs8yEzen0_D9Lab/9z.jpg" alt="" loading="lazy" aria-hidden="true"></div>
+      <div class="phone-frame"><img src="https://file.garden/aXs8yEzen0_D9Lab/10z.jpg" alt="" loading="lazy" aria-hidden="true"></div>
+      <div class="phone-frame"><img src="https://file.garden/aXs8yEzen0_D9Lab/11z.jpg" alt="" loading="lazy" aria-hidden="true"></div>
+      <div class="phone-frame"><img src="https://file.garden/aXs8yEzen0_D9Lab/12.jpg" alt="" loading="lazy" aria-hidden="true"></div>
+      <div class="phone-frame"><img src="https://file.garden/aXs8yEzen0_D9Lab/13z.jpg" alt="" loading="lazy" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
+<div class="glow-line"></div>
+
+<!-- FEATURES -->
+<section class="features-section" id="fitur">
+  <div class="features-header reveal">
+    <p class="section-label">Fitur Lengkap</p>
+    <h2 class="section-title">Semua yang kamu <em>butuhkan</em></h2>
+    <p class="section-desc">11 fitur eksklusif dirancang untuk menemani perjalanan hidayah dan kehidupan sehari-hari.</p>
+  </div>
+  <div class="features-grid">
+
+    <div class="feature-card reveal">
+      <div class="feature-icon">🎬</div>
+      <div class="feature-tag">Video Pendek</div>
+      <div class="feature-name">Tap Clipz</div>
+      <div class="feature-desc">Video pendek Islam yang asik untuk belajar agama secara santai dan cepat, cocok untuk Anda menemani setiap hari.</div>
+    </div>
+
+    <div class="feature-card reveal" style="transition-delay:0.05s">
+      <div class="feature-icon">💧</div>
+      <div class="feature-tag">Menyentuh Hati</div>
+      <div class="feature-name">Pisz</div>
+      <div class="feature-desc">Video yang mengingatkan dan menggerakkan hati Anda, dari konten yang membuat air mata jatuh karena keindahan keimanan.</div>
+    </div>
+
+    <div class="feature-card reveal" style="transition-delay:0.1s">
+      <div class="feature-icon">📰</div>
+      <div class="feature-tag">Berita</div>
+      <div class="feature-name">Newz</div>
+      <div class="feature-desc">Berita terkini yang disajikan dengan batasan syariat Islam, sehingga menjadi informasi yang bermanfaat tanpa konten yang merusak.</div>
+    </div>
+
+    <div class="feature-card reveal" style="transition-delay:0.15s">
+      <div class="feature-icon">🧒</div>
+      <div class="feature-tag">Anak</div>
+      <div class="feature-name">Kidz</div>
+      <div class="feature-desc">Konten edukatif untuk anak-anak, tumbuhkan kecintaan pada belajar sejak dini dengan cara yang menyenangkan.</div>
+    </div>
+
+    <div class="feature-card reveal" style="transition-delay:0.2s">
+      <div class="feature-icon">🧠</div>
+      <div class="feature-tag">Kuis</div>
+      <div class="feature-name">Kuiz</div>
+      <div class="feature-desc">Uji pengetahuan Islam dan pengetahuan umum kamu lewat kuis interaktif yang mengasah wawasan setiap hari.</div>
+    </div>
+
+    <div class="feature-card reveal" style="transition-delay:0.25s">
+      <div class="feature-icon">📺</div>
+      <div class="feature-tag">Streaming</div>
+      <div class="feature-name">TV</div>
+      <div class="feature-desc">Nikmati streaming kajian ulama dan berita internasional islami langsung di genggaman tanganmu.</div>
+    </div>
+
+    <div class="feature-card reveal" style="transition-delay:0.3s">
+      <div class="feature-icon">📅</div>
+      <div class="feature-tag">Kalender</div>
+      <div class="feature-name">Kalender</div>
+      <div class="feature-desc">Kalender Masehi & Hijriyah lengkap dengan hari penting Islam, fitur menstruasi, dan catatan ringan harian.</div>
+    </div>
+
+    <div class="feature-card reveal" style="transition-delay:0.35s">
+      <div class="feature-icon">✨</div>
+      <div class="feature-tag">Tiga AI Model</div>
+      <div class="feature-name">Tanya</div>
+      <div class="feature-desc">Tiga asisten AI cerdas: Cloud Sunnah (agama & hukum), Cloud Cendikia (ilmu pengetahuan), Cloud Sahabat (konseling mental).</div>
+    </div>
+
+    <div class="feature-card reveal" style="transition-delay:0.4s">
+      <div class="feature-icon">📖</div>
+      <div class="feature-tag">Artikel</div>
+      <div class="feature-name">Readz</div>
+      <div class="feature-desc">Artikel Islam berkualitas yang memperdalam pemahaman agama sesuai Al-Qur'an dan Sunnah Rasulullah ﷺ.</div>
+    </div>
+
+    <div class="feature-card reveal" style="transition-delay:0.45s">
+      <div class="feature-icon">🔬</div>
+      <div class="feature-tag">Penelitian</div>
+      <div class="feature-name">Risetz</div>
+      <div class="feature-desc">Artikel penelitian ilmiah internasional untuk memperluas wawasan dengan landasan yang kuat dan terpercaya.</div>
+    </div>
+
+    <div class="feature-card reveal" style="transition-delay:0.5s">
+      <div class="feature-icon">🍳</div>
+      <div class="feature-tag">Masakan</div>
+      <div class="feature-name">Cookz</div>
+      <div class="feature-desc">Konten masakan halal lezat, lengkap dengan resep, inspirasi menu, dan tips memasak yang sesuai dari ahlinya.</div>
+    </div>
+
+  </div>
+</section>
+
+<div class="glow-line"></div>
+
+<!-- AI TANYA -->
+<section class="ai-section" id="tanya">
+  <div class="ai-grid">
+    <div class="reveal">
+      <p class="section-label">Fitur Tanya</p>
+      <h2 class="section-title">Tiga <em>kecerdasan</em> untuk tiga kebutuhan</h2>
+      <p class="section-desc">IONA hadir dengan tiga model AI yang dirancang khusus untuk membantu kehidupan Anda, dari fatwa hingga curhat.</p>
+    </div>
+    <div class="ai-cards">
+      <div class="ai-card active reveal" style="transition-delay:0.1s">
+        <div class="ai-icon sun">☀️</div>
+        <div>
+          <div class="ai-card-role">Agama · Hukum · Dalil</div>
+          <div class="ai-card-title">Cloud Sunnah 3.5</div>
+          <div class="ai-card-desc">Tanya tentang agama Islam, hukum syariat, dan dalil dari Al-Qur'an maupun Hadits Shahih.</div>
+        </div>
+      </div>
+      <div class="ai-card reveal" style="transition-delay:0.2s">
+        <div class="ai-icon star">⭐</div>
+        <div>
+          <div class="ai-card-role">Informasi · Edukasi · Pengetahuan</div>
+          <div class="ai-card-title">Cloud Cendikia 3.3</div>
+          <div class="ai-card-desc">Asisten pengetahuan umum yang cerdas, dari sains hingga sejarah, disajikan dengan perspektif islami.</div>
+        </div>
+      </div>
+      <div class="ai-card reveal" style="transition-delay:0.3s">
+        <div class="ai-icon heart">💗</div>
+        <div>
+          <div class="ai-card-role">Curhat · Konseling Mental</div>
+          <div class="ai-card-title">Cloud Sahabat 3.2</div>
+          <div class="ai-card-desc">Teman curhat yang selalu ada, membantu meredakan beban pikiran dan memberikan konseling yang menenangkan.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-section">
+  <div class="stat-item reveal">
+    <div class="stat-num">11+</div>
+    <div class="stat-label">Fitur Eksklusif</div>
+  </div>
+  <div class="stat-item reveal" style="transition-delay:0.1s">
+    <div class="stat-num">3</div>
+    <div class="stat-label">Model AI Cerdas</div>
+  </div>
+  <div class="stat-item reveal" style="transition-delay:0.2s">
+    <div class="stat-num">100%</div>
+    <div class="stat-label">Sesuai Syariat</div>
+  </div>
+  <div class="stat-item reveal" style="transition-delay:0.3s">
+    <div class="stat-num">Rp5K</div>
+    <div class="stat-label">Mulai dari sini</div>
+  </div>
+</div>
+
+<div class="glow-line"></div>
+
+<!-- PRICING -->
+<section class="pricing-section" id="harga">
+  <div style="text-align:center" class="reveal">
+    <p class="section-label">Paket Harga</p>
+    <h2 class="section-title">Pilih paket <em>terbaikmu</em></h2>
+    <p class="section-desc" style="margin:0 auto">Harga yang sangat terjangkau untuk konten islami berkualitas tinggi setiap harinya.</p>
+  </div>
+  <div class="pricing-grid">
+
+    <!-- PREMIUM -->
+    <div class="pricing-card reveal">
+      <div class="pricing-badge badge-premium">Premium</div>
+      <div class="pricing-name">Premium</div>
+      <div class="pricing-price">Rp5K</div>
+      <div class="pricing-period">per bulan</div>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-features">
+        <li>Akses semua fitur utama</li>
+        <li>Konten video lengkap</li>
+        <li>Tanya AI (3 model)</li>
+        <li>Kalender Islami & fitur catatan</li>
+        <li class="no">Video langka terkunci</li>
+        <li class="no">Tanpa centang biru komunitas</li>
+      </ul>
+      <a href="https://wa.me/6285648545159?text=Assalamu'alaikum%2C%20saya%20ingin%20berlangganan%20paket%20Premium%20IONA%20Rp5.000%2Fbulan%20🌸" target="_blank" class="pricing-cta cta-outline">Mulai Premium</a>
+    </div>
+
+    <!-- EXCLUSIVE -->
+    <div class="pricing-card featured reveal" style="transition-delay:0.1s">
+      <div class="featured-ribbon">Terbaik</div>
+      <div class="pricing-badge badge-exclusive">Exclusive</div>
+      <div class="pricing-name">Exclusive</div>
+      <div class="pricing-price">Rp10K</div>
+      <div class="pricing-period">per bulan</div>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-features">
+        <li>Semua fitur Premium</li>
+        <li>Akses video langka</li>
+        <li>Centang biru di Komunitas</li>
+        <li>Prioritas konten terbaru</li>
+        <li>Akses penuh semua kategori</li>
+        <li>Dukungan eksklusif anggota</li>
+      </ul>
+      <a href="https://wa.me/6285648545159?text=Assalamu'alaikum%2C%20saya%20ingin%20berlangganan%20paket%20Exclusive%20IONA%20Rp10.000%2Fbulan%20🌸" target="_blank" class="pricing-cta cta-solid">Mulai Exclusive</a>
+    </div>
+
+    <!-- TRIAL -->
+    <div class="pricing-card reveal" style="transition-delay:0.2s">
+      <div class="pricing-badge badge-trial">Trial</div>
+      <div class="pricing-name">Trial</div>
+      <div class="pricing-price" style="font-size:1.8rem;color:var(--text3)">Promo</div>
+      <div class="pricing-period">jika ada promo aktif</div>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-features">
+        <li>Akses fitur terpilih</li>
+        <li>Hanya saat promo berlangsung</li>
+        <li>Tanya info lebih lanjut ke WA</li>
+      </ul>
+      <a href="https://wa.me/6285648545159?text=Assalamu'alaikum%2C%20saya%20ingin%20tanya%20tentang%20promo%20Trial%20IONA%20🌸" target="_blank" class="pricing-cta cta-outline">Tanya ke Cloud Sunnah</a>
+    </div>
+
+  </div>
+</section>
+
+<div class="glow-line"></div>
+
+<!-- VISION / ABOUT -->
+<section class="vision-section" id="tentang">
+  <div class="reveal">
+    <p class="section-label">Tentang IONA</p>
+    <h2 class="section-title">Dibuat dengan <em>cinta</em> untuk Anda</h2>
+    <p class="section-desc" style="margin-bottom:1.5rem">IONA lahir dari keprihatinan terhadap lautan konten digital yang merusak. Kami hadir sebagai <b>penyejuk</b> menyajikan konten yang mendidik dan menguatkan iman.</p>
+    <p class="section-desc">Setiap konten diseleksi ketat terlebih dahulu agar, Anda lebih dekat dengan <b>Al-Qur'an dan Sunnah Rasulullah ﷺ</b>. Bukan sekadar aplikasi ini adalah rumah digital umat Islam.</p>
+  </div>
+  <div class="vision-visual reveal" style="transition-delay:0.2s">
+    <div class="vision-ring ring1"></div>
+    <div class="vision-ring ring2"></div>
+    <div class="vision-ring ring3"></div>
+    <div class="vision-center">
+      <div class="big-letter">IONA</div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMUNITY SECTION -->
+<section class="community-section">
+  <p class="section-label reveal">Komunitas</p>
+  <h2 class="section-title reveal">Bergabung & <em>terhubung</em></h2>
+  <p class="section-desc reveal">Pengguna Exclusive mendapatkan centang biru <svg class="verified-badge" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.15-.43.238-.89.238-1.37 0-2.206-1.794-4-4-4-.48 0-.94.088-1.37.238C14.568 2.505 13.197 1.63 11.617 1.63c-1.58 0-2.95.875-3.6 2.148-.43-.15-.89-.238-1.37-.238-2.206 0-4 1.794-4 4 0 .48.088.94.238 1.37C1.63 9.55 0.755 10.92 0.755 12.5c0 1.58.875 2.95 2.148 3.6-.15.43-.238.89-.238 1.37 0 2.206 1.794 4 4 4 .48 0 .94-.088 1.37-.238.652 1.273 2.023 2.148 3.603 2.148 1.58 0 2.95-.875 3.6-2.148.43.15.89.238 1.37.238 2.206 0 4-1.794 4-4 0-.48-.088-.94-.238-1.37 1.273-.652 2.148-2.023 2.148-3.603z" fill="#1D9BF0"/><path d="M9.75 16.25c-.256 0-.512-.098-.707-.293l-3.25-3.25c-.39-.39-.39-1.023 0-1.414s1.023-.39 1.414 0l2.543 2.543 6.343-6.343c.39-.39 1.023-.39 1.414 0s.39 1.023 0 1.414l-7.043 7.043c-.195.195-.45.293-.707.293z" fill="#FFFFFF"/></svg> di Community — tanda keaktifan dan kepercayaan dalam ekosistem IONA.</p>
+
+ <div class="chat-preview reveal">
+    <div class="chat-bubble left">
+      <span class="verified">Anggota Exclusive<svg class="verified-badge" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.15-.43.238-.89.238-1.37 0-2.206-1.794-4-4-4-.48 0-.94.088-1.37.238C14.568 2.505 13.197 1.63 11.617 1.63c-1.58 0-2.95.875-3.6 2.148-.43-.15-.89-.238-1.37-.238-2.206 0-4 1.794-4 4 0 .48.088.94.238 1.37C1.63 9.55 0.755 10.92 0.755 12.5c0 1.58.875 2.95 2.148 3.6-.15.43-.238.89-.238 1.37 0 2.206 1.794 4 4 4 .48 0 .94-.088 1.37-.238.652 1.273 2.023 2.148 3.603 2.148 1.58 0 2.95-.875 3.6-2.148.43.15.89.238 1.37.238 2.206 0 4-1.794 4-4 0-.48-.088-.94-.238-1.37 1.273-.652 2.148-2.023 2.148-3.603z" fill="#1D9BF0"/><path d="M9.75 16.25c-.256 0-.512-.098-.707-.293l-3.25-3.25c-.39-.39-.39-1.023 0-1.414s1.023-.39 1.414 0l2.543 2.543 6.343-6.343c.39-.39 1.023-.39 1.414 0s.39 1.023 0 1.414l-7.043 7.043c-.195.195-.45.293-.707.293z" fill="#FFFFFF"/></svg></span>
+      Masya Allah, konten di IONA sangat membantu perjalanan hijrah saya 🌸
+    </div>
+    <div class="chat-bubble right">
+      Alhamdulillah, semoga Allah mudahkan kita semua 🤲
+    </div>
+    <div class="chat-bubble left">
+      Konten Tap Clipz-nya singkat tapi dalem banget ilmunya!
+    </div>
+  </div>
+
+  <div style="margin-top:2.5rem" class="reveal">
+    <a href="https://wa.me/6285648545159?text=Assalamu'alaikum%2C%20saya%20ingin%20bergabung%20dengan%20komunitas%20IONA%20🌸" target="_blank" class="btn-xl primary" style="margin:0 auto;display:inline-flex">💬 Hubungi Cloud Sunnah</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo">IONA</span>
+      <p>Islamic Online Network App — platform konten islami yang bersih, terpercaya, dan menyejukkan hati. Dibuat untuk Anda, oleh Cloud Sunnah.</p>
+      <p style="margin-top:1rem; font-size:0.8rem; color:var(--text3)">📱 WA Cloud Sunnah: <a href="https://wa.me/6285648545159" style="color:var(--accent2); text-decoration:none">0856-4854-5159</a></p>
+    </div>
+    <div class="footer-col">
+      <h4>Fitur</h4>
+      <ul>
+        <li><a href="#fitur">Tap Clipz</a></li>
+        <li><a href="#fitur">Pisz</a></li>
+        <li><a href="#fitur">Newz</a></li>
+        <li><a href="#fitur">Kidz</a></li>
+        <li><a href="#fitur">Kuiz</a></li>
+        <li><a href="#fitur">TV</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Lainnya</h4>
+      <ul>
+        <li><a href="#fitur">Kalender</a></li>
+        <li><a href="#tanya">Tanya AI</a></li>
+        <li><a href="#fitur">Readz</a></li>
+        <li><a href="#fitur">Risetz</a></li>
+        <li><a href="#fitur">Cookz</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Paket</h4>
+      <ul>
+        <li><a href="#harga">Premium — Rp5K</a></li>
+        <li><a href="#harga">Exclusive — Rp10K</a></li>
+        <li><a href="#harga">Trial — Promo</a></li>
+        <li><a href="https://wa.me/6285648545159" target="_blank">Hubungi Kami</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 IONA — Islamic Online Network App. Semua hak dilindungi.</p>
+    <p style="color:var(--accent2)">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p>
+  </div>
+</footer>
+
+<script>
+  // Theme Toggle
+  const html = document.documentElement;
+  const btn = document.getElementById('themeToggle');
+  let dark = true;
+
+  btn.addEventListener('click', () => {
+    dark = !dark;
+    html.setAttribute('data-theme', dark ? 'dark' : 'light');
+    btn.textContent = dark ? '🌙' : '☀️';
+  });
+
+  // Mobile Menu
+  const hamburger = document.getElementById('hamburger');
+  const menu = document.getElementById('mobileMenu');
+
+  hamburger.addEventListener('click', () => {
+    menu.classList.toggle('open');
+  });
+
+  function closeMobile() {
+    menu.classList.remove('open');
+  }
+
+  // Scroll Reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  reveals.forEach(el => observer.observe(el));
+
+  // Smooth nav background on scroll
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      nav.style.boxShadow = 'var(--nav-shadow)';
+    } else {
+      nav.style.boxShadow = 'none';
+    }
+  });
+
+  // Parallax blobs
+  window.addEventListener('mousemove', (e) => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 20;
+    const y = (e.clientY / window.innerHeight - 0.5) * 20;
+    document.querySelector('.blob-1').style.transform = `translate(${x}px, ${y}px)`;
+    document.querySelector('.blob-2').style.transform = `translate(${-x * 0.7}px, ${-y * 0.7}px)`;
+    document.querySelector('.blob-3').style.transform = `translate(${x * 0.4}px, ${y * 1.2}px)`;
+  });
+</script>
+</body>
+</html>
