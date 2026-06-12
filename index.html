@@ -960,7 +960,225 @@
     margin-right: 4px;
     margin-top: -2px;
   }
-</style>
+
+  /* ─── AI COMPARISON SECTION ─── */
+  .compare-section { padding: 6rem 5%; }
+  .compare-header { text-align: center; margin-bottom: 3rem; }
+  .compare-header .section-desc { max-width: 560px; margin: 0 auto; }
+
+  .compare-tab-nav {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+  }
+  .ctab {
+    padding: 0.5rem 1.3rem;
+    border-radius: 999px;
+    border: 1px solid var(--border2);
+    background: transparent;
+    color: var(--text2);
+    font-size: 0.78rem;
+    font-weight: 700;
+    font-family: 'Syne', sans-serif;
+    cursor: pointer;
+    transition: all 0.25s;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .ctab:hover { border-color: var(--accent); color: var(--accent2); background: var(--glow2); }
+  .ctab.active {
+    background: linear-gradient(135deg, var(--pink-500), var(--pink-700));
+    border-color: transparent;
+    color: #fff;
+    box-shadow: 0 0 20px var(--glow);
+  }
+
+  /* ─── COMPARE TABLE (DESKTOP) ─── */
+  .compare-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: var(--r2);
+    border: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 680px;
+  }
+  .compare-table th,
+  .compare-table td {
+    padding: 1rem 1.2rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.875rem;
+    line-height: 1.65;
+    vertical-align: top;
+    transition: background 0.2s;
+  }
+  .compare-table thead th {
+    padding-top: 1.4rem;
+    padding-bottom: 1.4rem;
+    background: var(--bg2);
+    font-family: 'Syne', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text3);
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
+  .compare-table tbody tr:last-child td { border-bottom: none; }
+  .compare-table tbody tr:hover td { background: var(--glow2); }
+  .compare-table td.aspect {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text3);
+    white-space: nowrap;
+    min-width: 115px;
+    background: var(--bg2);
+  }
+
+  /* IONA column tints */
+  th.sunnah-col, td.sunnah-col { background: rgba(247,43,120,0.05); color: var(--text); }
+  th.cendikia-col, td.cendikia-col { background: rgba(124,58,237,0.05); color: var(--text); }
+  th.sahabat-col, td.sahabat-col { background: rgba(236,72,153,0.05); color: var(--text); }
+  th.umum-col, td.umum-col { background: transparent; color: var(--text2); }
+
+  .compare-table tbody tr:hover td.sunnah-col { background: rgba(247,43,120,0.1); }
+  .compare-table tbody tr:hover td.cendikia-col { background: rgba(124,58,237,0.1); }
+  .compare-table tbody tr:hover td.sahabat-col { background: rgba(236,72,153,0.1); }
+
+  /* Column header layout */
+  .col-head { display: flex; flex-direction: column; gap: 0.25rem; }
+  .col-head-name { display: flex; align-items: center; gap: 0.4rem; }
+  .col-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .dot-sunnah { background: #f72b78; box-shadow: 0 0 6px rgba(247,43,120,0.8); }
+  .dot-cendikia { background: #7c3aed; box-shadow: 0 0 6px rgba(124,58,237,0.8); }
+  .dot-sahabat { background: #ec4899; box-shadow: 0 0 6px rgba(236,72,153,0.8); }
+  .dot-umum { background: var(--text3); }
+  .col-head-sub {
+    font-size: 0.62rem;
+    letter-spacing: 0;
+    text-transform: none;
+    font-weight: 400;
+    margin-top: 1px;
+  }
+  th.sunnah-col .col-head-sub { color: var(--accent2); }
+  th.cendikia-col .col-head-sub { color: #a78bfa; }
+  th.sahabat-col .col-head-sub { color: #f9a8d4; }
+  th.umum-col .col-head-sub { color: var(--text3); opacity: 0.8; }
+
+  .iona-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--pink-500), var(--pink-700));
+    color: #fff;
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    vertical-align: middle;
+    margin-left: 0.3rem;
+    line-height: 1.2;
+  }
+
+  /* ─── COMPARE CARDS (MOBILE) ─── */
+  .compare-cards {
+    display: none;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .cmp-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r2);
+    overflow: hidden;
+  }
+  .cmp-card.sunnah-card { border-left: 3px solid #f72b78; }
+  .cmp-card.cendikia-card { border-left: 3px solid #7c3aed; }
+  .cmp-card.sahabat-card { border-left: 3px solid #ec4899; }
+  .cmp-card-header {
+    padding: 1.2rem 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .cmp-card.sunnah-card .cmp-card-header { background: rgba(247,43,120,0.06); }
+  .cmp-card.cendikia-card .cmp-card-header { background: rgba(124,58,237,0.06); }
+  .cmp-card.sahabat-card .cmp-card-header { background: rgba(236,72,153,0.06); }
+  .cmp-card.umum-card .cmp-card-header { background: var(--bg2); }
+  .cmp-card-icon {
+    width: 42px; height: 42px;
+    border-radius: 11px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+  .cmp-card-info { flex: 1; min-width: 0; }
+  .cmp-card-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; line-height: 1.3; }
+  .cmp-card-subtitle {
+    font-size: 0.68rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    margin-top: 0.15rem;
+  }
+  .cmp-card.umum-card .cmp-card-subtitle { color: var(--text3); }
+  .cmp-card-body { padding: 1.2rem 1.4rem; display: flex; flex-direction: column; gap: 0.9rem; }
+  .cmp-row { display: flex; flex-direction: column; gap: 0.2rem; }
+  .cmp-row-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text3);
+  }
+  .cmp-row-value { font-size: 0.85rem; color: var(--text2); line-height: 1.55; }
+  .cmp-card.sunnah-card .cmp-row-value,
+  .cmp-card.cendikia-card .cmp-row-value,
+  .cmp-card.sahabat-card .cmp-row-value { color: var(--text); }
+
+  /* ─── COMPARE ADVANTAGES ─── */
+  .compare-advantages { margin-top: 3rem; text-align: center; }
+  .compare-adv-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--text2);
+    margin-bottom: 1.2rem;
+  }
+  .compare-adv-chips { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; }
+  .adv-chip {
+    padding: 0.45rem 1rem;
+    border-radius: 999px;
+    background: rgba(247,43,120,0.07);
+    border: 1px solid var(--border2);
+    color: var(--accent2);
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: all 0.22s;
+    cursor: default;
+  }
+  .adv-chip:hover { background: rgba(247,43,120,0.14); transform: translateY(-2px); box-shadow: 0 4px 15px var(--glow2); }
+
+  @media (max-width: 768px) {
+    .compare-table-wrap { display: none; }
+    .compare-cards { display: flex; }
+  }
 </style>
 </head>
 <body>
@@ -983,6 +1201,7 @@
   <div class="nav-links">
     <a href="#fitur">Fitur</a>
     <a href="#tanya">AI Tanya</a>
+	<a href="#perbandingan">vs AI Lain</a>
     <a href="#harga">Harga</a>
     <a href="#tentang">Tentang</a>
   </div>
@@ -999,6 +1218,7 @@
 <div class="mobile-menu" id="mobileMenu">
   <a href="#fitur" onclick="closeMobile()">Fitur</a>
   <a href="#tanya" onclick="closeMobile()">AI Tanya</a>
+  <a href="#perbandingan" onclick="closeMobile()">vs AI Lain</a>
   <a href="#harga" onclick="closeMobile()">Harga</a>
   <a href="#tentang" onclick="closeMobile()">Tentang</a>
 </div>
@@ -1235,6 +1455,186 @@
   </div>
 </section>
 
+<div class="glow-line"></div>
+
+<!-- AI COMPARISON -->
+<section class="compare-section" id="perbandingan">
+
+  <div class="compare-header reveal">
+    <p class="section-label">Perbandingan AI</p>
+    <h2 class="section-title">Kenapa AI kami <em>berbeda</em>?</h2>
+    <p class="section-desc">AI IONA bukan AI generik. Setiap model dirancang khusus dengan nilai Islam — berbeda jauh dari ChatGPT, Gemini, atau sejenisnya.</p>
+  </div>
+
+  <div class="compare-tab-nav reveal" style="transition-delay:0.1s">
+    <button class="ctab active" data-tab="all" onclick="switchCompareTab('all')">Semua Model</button>
+    <button class="ctab" data-tab="sunnah" onclick="switchCompareTab('sunnah')">Cloud Sunnah</button>
+    <button class="ctab" data-tab="cendikia" onclick="switchCompareTab('cendikia')">Cloud Cendikia</button>
+    <button class="ctab" data-tab="sahabat" onclick="switchCompareTab('sahabat')">Cloud Sahabat</button>
+  </div>
+
+  <!-- Desktop Table -->
+  <div class="compare-table-wrap reveal" style="transition-delay:0.2s">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th style="min-width:115px">Aspek</th>
+          <th class="sunnah-col">
+            <div class="col-head">
+              <div class="col-head-name"><div class="col-dot dot-sunnah"></div>Cloud Sunnah <span class="iona-badge">IONA</span></div>
+              <div class="col-head-sub">AI Agama · v5.7</div>
+            </div>
+          </th>
+          <th class="cendikia-col">
+            <div class="col-head">
+              <div class="col-head-name"><div class="col-dot dot-cendikia"></div>Cloud Cendikia <span class="iona-badge">IONA</span></div>
+              <div class="col-head-sub">AI Sains & Kerja · v5.3</div>
+            </div>
+          </th>
+          <th class="sahabat-col">
+            <div class="col-head">
+              <div class="col-head-name"><div class="col-dot dot-sahabat"></div>Cloud Sahabat <span class="iona-badge">IONA</span></div>
+              <div class="col-head-sub">AI Teman Curhat · v4.9</div>
+            </div>
+          </th>
+          <th class="umum-col">
+            <div class="col-head">
+              <div class="col-head-name"><div class="col-dot dot-umum"></div>AI Umum</div>
+              <div class="col-head-sub">ChatGPT · Gemini · Deepseek · Qwen</div>
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="aspect">Peran Utama</td>
+          <td class="sunnah-col">Menjawab masalah agama, dalil, dan hukum Islam berdasarkan Al-Qur'an & Sunnah sahih.</td>
+          <td class="cendikia-col">Membantu tugas sekolah, pekerjaan, sains, dan koding dasar.</td>
+          <td class="sahabat-col">Menjadi teman mengobrol, pendengar curhat, dan motivator hidup.</td>
+          <td class="umum-col">Menjawab semua topik dalam satu model — serba bisa tanpa spesialisasi.</td>
+        </tr>
+        <tr>
+          <td class="aspect">Gaya Bahasa</td>
+          <td class="sunnah-col">Lembut, santun, bijak, dan menenangkan — layaknya ulama yang penuh hikmah.</td>
+          <td class="cendikia-col">Baku, profesional, rapi, dan langsung ke inti masalah.</td>
+          <td class="sahabat-col">Sangat akrab, gunakan "Aku-Kamu" dan emoticon — terasa seperti sahabat nyata 🤗</td>
+          <td class="umum-col">Kadang kaku, formal, atau terasa seperti terjemahan mesin yang kurang natural.</td>
+        </tr>
+        <tr>
+          <td class="aspect">Filter Islam</td>
+          <td class="sunnah-col">Wajib menggunakan dalil Al-Qur'an & Sunnah sahih sesuai pemahaman para Sahabat Nabi ﷺ.</td>
+          <td class="cendikia-col">Menjelaskan ilmu pengetahuan, namun wajib mengingatkan jika ada hal yang diharamkan.</td>
+          <td class="sahabat-col">Menghibur & membantu curhat, namun melarang solusi yang bertentangan dengan agama.</td>
+          <td class="umum-col">Netral secara moral — menjelaskan riba, hubungan bebas, dll. tanpa filter halal-haram.</td>
+        </tr>
+        <tr>
+          <td class="aspect">Sistem Cerdas</td>
+          <td class="sunnah-col">Otomatis mengarahkan ke Cloud Cendikia (soal umum) atau Cloud Sahabat (curhat).</td>
+          <td class="cendikia-col">Otomatis mengarahkan ke Cloud Sunnah (soal dalil) atau Cloud Sahabat (curhat).</td>
+          <td class="sahabat-col">Otomatis mengarahkan ke Cloud Sunnah (soal dalil) atau Cloud Cendikia (akademis).</td>
+          <td class="umum-col">Tidak ada sistem pengalihan — satu AI menjawab semua tanpa karakter khusus.</td>
+        </tr>
+        <tr>
+          <td class="aspect">Batasan Khusus</td>
+          <td class="sunnah-col">Menolak soal koding, matematika, sains umum, dan curhat pribadi.</td>
+          <td class="cendikia-col">Tidak membuat kode program sangat panjang — hanya logika inti yang penting.</td>
+          <td class="sahabat-col">Menolak memberikan fatwa hukum agama atau analisis akademis yang berat.</td>
+          <td class="umum-col">Bisa memberikan saran yang tidak sesuai atau bertentangan dengan prinsip syariat Islam.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Mobile Cards -->
+  <div class="compare-cards" id="compareCards">
+
+    <div class="cmp-card sunnah-card reveal" data-model="sunnah">
+      <div class="cmp-card-header">
+        <div class="cmp-card-icon" style="background:linear-gradient(135deg,#f72b78,#8a0e3b)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 2v19"/><path d="M22 7H2"/></svg>
+        </div>
+        <div class="cmp-card-info">
+          <div class="cmp-card-title">Cloud Sunnah <span class="iona-badge">IONA</span></div>
+          <div class="cmp-card-subtitle">AI Agama · v5.7</div>
+        </div>
+      </div>
+      <div class="cmp-card-body">
+        <div class="cmp-row"><div class="cmp-row-label">Peran Utama</div><div class="cmp-row-value">Menjawab masalah agama, dalil, dan hukum Islam berdasarkan Al-Qur'an & Sunnah sahih.</div></div>
+        <div class="cmp-row"><div class="cmp-row-label">Gaya Bahasa</div><div class="cmp-row-value">Lembut, santun, bijak, dan menenangkan.</div></div>
+        <div class="cmp-row"><div class="cmp-row-label">Filter Islam</div><div class="cmp-row-value">Wajib dalil sahih sesuai pemahaman para Sahabat Nabi ﷺ.</div></div>
+        <div class="cmp-row"><div class="cmp-row-label">Sistem Cerdas</div><div class="cmp-row-value">Otomatis arahkan ke Cloud Cendikia atau Cloud Sahabat sesuai konteks.</div></div>
+      </div>
+    </div>
+
+    <div class="cmp-card cendikia-card reveal" style="transition-delay:0.08s" data-model="cendikia">
+      <div class="cmp-card-header">
+        <div class="cmp-card-icon" style="background:linear-gradient(135deg,#7c3aed,#4f1d9b)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <div class="cmp-card-info">
+          <div class="cmp-card-title">Cloud Cendikia <span class="iona-badge">IONA</span></div>
+          <div class="cmp-card-subtitle">AI Sains & Kerja · v5.3</div>
+        </div>
+      </div>
+      <div class="cmp-card-body">
+        <div class="cmp-row"><div class="cmp-row-label">Peran Utama</div><div class="cmp-row-value">Membantu tugas sekolah, pekerjaan, sains, dan koding dasar.</div></div>
+        <div class="cmp-row"><div class="cmp-row-label">Gaya Bahasa</div><div class="cmp-row-value">Baku, profesional, rapi, dan langsung ke inti masalah.</div></div>
+        <div class="cmp-row"><div class="cmp-row-label">Filter Islam</div><div class="cmp-row-value">Menjelaskan ilmu, namun wajib mengingatkan hal yang diharamkan Islam.</div></div>
+        <div class="cmp-row"><div class="cmp-row-label">Sistem Cerdas</div><div class="cmp-row-value">Otomatis arahkan ke Cloud Sunnah atau Cloud Sahabat sesuai konteks.</div></div>
+      </div>
+    </div>
+
+    <div class="cmp-card sahabat-card reveal" style="transition-delay:0.16s" data-model="sahabat">
+      <div class="cmp-card-header">
+        <div class="cmp-card-icon" style="background:linear-gradient(135deg,#ec4899,#be185d)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+        </div>
+        <div class="cmp-card-info">
+          <div class="cmp-card-title">Cloud Sahabat <span class="iona-badge">IONA</span></div>
+          <div class="cmp-card-subtitle">AI Teman Curhat · v4.9</div>
+        </div>
+      </div>
+      <div class="cmp-card-body">
+        <div class="cmp-row"><div class="cmp-row-label">Peran Utama</div><div class="cmp-row-value">Menjadi teman mengobrol, pendengar curhat, dan motivator hidup.</div></div>
+        <div class="cmp-row"><div class="cmp-row-label">Gaya Bahasa</div><div class="cmp-row-value">Sangat akrab, gunakan "Aku-Kamu" dan emoticon — terasa seperti sahabat nyata 🤗</div></div>
+        <div class="cmp-row"><div class="cmp-row-label">Filter Islam</div><div class="cmp-row-value">Menghibur, namun melarang solusi yang melanggar agama Islam.</div></div>
+        <div class="cmp-row"><div class="cmp-row-label">Sistem Cerdas</div><div class="cmp-row-value">Otomatis arahkan ke Cloud Sunnah atau Cloud Cendikia sesuai konteks.</div></div>
+      </div>
+    </div>
+
+    <div class="cmp-card umum-card reveal" style="transition-delay:0.24s" data-model="umum">
+      <div class="cmp-card-header">
+        <div class="cmp-card-icon" style="background:var(--surface2);border:1px solid var(--border2);font-size:1.2rem">🤖</div>
+        <div class="cmp-card-info">
+          <div class="cmp-card-title">AI Umum</div>
+          <div class="cmp-card-subtitle">ChatGPT · Gemini · Deepseek · Qwen</div>
+        </div>
+      </div>
+      <div class="cmp-card-body">
+        <div class="cmp-row"><div class="cmp-row-label">Peran Utama</div><div class="cmp-row-value">Menjawab semua topik dalam satu model — serba bisa tanpa spesialisasi.</div></div>
+        <div class="cmp-row"><div class="cmp-row-label">Gaya Bahasa</div><div class="cmp-row-value">Kadang kaku, formal, atau terasa seperti terjemahan mesin.</div></div>
+        <div class="cmp-row"><div class="cmp-row-label">Filter Islam</div><div class="cmp-row-value">Netral secara moral — tanpa filter halal-haram sama sekali.</div></div>
+        <div class="cmp-row"><div class="cmp-row-label">Sistem Cerdas</div><div class="cmp-row-value">Tidak ada sistem pengalihan — satu AI untuk semua topik.</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Advantage Chips -->
+  <div class="compare-advantages reveal" style="transition-delay:0.3s">
+    <p class="compare-adv-label">✅ Keunggulan eksklusif AI IONA dibanding AI biasa</p>
+    <div class="compare-adv-chips">
+      <span class="adv-chip">🕌 Filter Al-Qur'an & Sunnah</span>
+      <span class="adv-chip">🔄 Pengalihan Otomatis</span>
+      <span class="adv-chip">💬 Gaya Bahasa Islami</span>
+      <span class="adv-chip">🛡️ Anti Konten Haram</span>
+      <span class="adv-chip">❤️ Konseling Mental Halal</span>
+      <span class="adv-chip">🎯 Spesialisasi 3 Bidang</span>
+    </div>
+  </div>
+
+</section>
+
 <!-- STATS -->
 <div class="stats-section">
   <div class="stat-item reveal">
@@ -1455,6 +1855,24 @@
       nav.style.boxShadow = 'none';
     }
   });
+
+  // Compare AI Tab Switch
+  function switchCompareTab(tab) {
+    document.querySelectorAll('.ctab').forEach(t => t.classList.remove('active'));
+    document.querySelector(`.ctab[data-tab="${tab}"]`).classList.add('active');
+    ['sunnah', 'cendikia', 'sahabat'].forEach(model => {
+      const show = tab === 'all' || tab === model;
+      document.querySelectorAll(`.${model}-col`).forEach(el => {
+        el.style.display = show ? '' : 'none';
+      });
+    });
+    document.querySelectorAll('.cmp-card').forEach(card => {
+      const show = tab === 'all' || card.dataset.model === tab || card.dataset.model === 'umum';
+      card.style.display = show ? '' : 'none';
+    });
+  }
+
+  // Parallax blobs
 
   // Parallax blobs
   window.addEventListener('mousemove', (e) => {
