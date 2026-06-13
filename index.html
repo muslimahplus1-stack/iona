@@ -1179,6 +1179,290 @@
     .compare-table-wrap { display: none; }
     .compare-cards { display: flex; }
   }
+  
+  /* ─── AI DEMO CONVERSATIONS ─── */
+  .demo-section { padding: 6rem 5%; }
+  .demo-header { text-align: center; margin-bottom: 3rem; }
+  .demo-header .section-desc { max-width: 580px; margin: 0 auto; }
+
+  .demo-tab-nav {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+  }
+  .demo-tab {
+    padding: 0.55rem 1.5rem;
+    border-radius: 999px;
+    border: 1px solid var(--border2);
+    background: transparent;
+    color: var(--text2);
+    font-size: 0.78rem;
+    font-weight: 700;
+    font-family: 'Syne', sans-serif;
+    cursor: pointer;
+    transition: all 0.25s;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+  .demo-tab .demo-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; transition: all 0.25s; }
+  .demo-tab:hover { border-color: var(--accent); color: var(--accent2); background: var(--glow2); }
+  .demo-tab.active {
+    background: linear-gradient(135deg, var(--pink-500), var(--pink-700));
+    border-color: transparent;
+    color: #fff;
+    box-shadow: 0 0 20px var(--glow);
+  }
+  .demo-tab.active .demo-dot { background: rgba(255,255,255,0.9) !important; box-shadow: none !important; }
+
+  .demo-wrapper { max-width: 780px; margin: 0 auto; }
+  .demo-panel { display: none; }
+  .demo-panel.active { display: block; animation: demoFadeIn 0.4s cubic-bezier(.22,1,.36,1); }
+  @keyframes demoFadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+  .demo-window {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r2);
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25), 0 0 0 1px rgba(247,43,120,0.04);
+    transition: box-shadow 0.35s ease;
+  }
+  .demo-window:hover {
+    box-shadow: 0 28px 80px rgba(0,0,0,0.3), 0 0 0 1px rgba(247,43,120,0.1), 0 0 60px rgba(247,43,120,0.06);
+  }
+
+  .demo-chat-header {
+    padding: 1rem 1.5rem;
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .demo-chat-avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.15rem;
+    flex-shrink: 0;
+  }
+  .demo-chat-info { flex: 1; min-width: 0; }
+  .demo-chat-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.92rem;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+  .demo-chat-role { font-size: 0.68rem; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.15rem; }
+  .demo-online-dot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 7px rgba(34,197,94,0.7);
+    flex-shrink: 0;
+  }
+
+  .demo-topic-nav {
+    padding: 0.7rem 1.5rem;
+    background: var(--bg3);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+  .demo-topic-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text3);
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+  .demo-topic-dots { display: flex; gap: 0.4rem; align-items: center; }
+  .demo-topic-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    border: none;
+    padding: 0;
+    background: var(--border2);
+    cursor: pointer;
+    transition: all 0.25s;
+    flex-shrink: 0;
+  }
+  .demo-topic-dot.active { width: 22px; border-radius: 999px; background: var(--accent); box-shadow: 0 0 8px var(--glow); }
+  .demo-topic-arrows { display: flex; gap: 0.3rem; flex-shrink: 0; }
+  .demo-arrow-btn {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    border: 1px solid var(--border2);
+    background: transparent;
+    color: var(--text2);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem;
+    transition: all 0.22s;
+    line-height: 1;
+    font-family: inherit;
+  }
+  .demo-arrow-btn:hover:not(:disabled) { border-color: var(--accent); color: var(--accent2); background: var(--glow2); }
+  .demo-arrow-btn:disabled { opacity: 0.28; cursor: not-allowed; }
+
+  .demo-chat-body {
+    padding: 1.25rem 1.5rem;
+    height: 480px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    scroll-behavior: smooth;
+    background: var(--surface);
+  }
+  .demo-chat-body::-webkit-scrollbar { width: 3px; }
+  .demo-chat-body::-webkit-scrollbar-track { background: transparent; }
+  .demo-chat-body::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 999px; }
+  .demo-chat-body::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+  .demo-msg { display: flex; gap: 0.65rem; align-items: flex-end; }
+  .demo-msg.msg-user { flex-direction: row-reverse; }
+  @keyframes demoMsgIn {
+    from { opacity: 0; transform: translateY(10px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0)  scale(1); }
+  }
+  .demo-msg-avatar {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem;
+  }
+  .demo-msg-content { max-width: 78%; display: flex; flex-direction: column; }
+  .demo-msg.msg-user .demo-msg-content { align-items: flex-end; }
+
+  .demo-bubble {
+    padding: 0.85rem 1.1rem;
+    border-radius: 18px;
+    font-size: 0.855rem;
+    line-height: 1.7;
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
+  }
+  .demo-msg.msg-ai .demo-bubble {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-bottom-left-radius: 4px;
+    color: var(--text);
+  }
+  .demo-msg.msg-user .demo-bubble {
+    background: linear-gradient(135deg, var(--pink-500), var(--pink-700));
+    color: #fff;
+    border-bottom-right-radius: 4px;
+    box-shadow: 0 4px 16px rgba(247,43,120,0.28);
+  }
+  .demo-bubble .bubble-ai-label {
+    display: block;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.6rem;
+  }
+  .demo-bubble b, .demo-bubble strong { font-weight: 700; }
+  .demo-bubble ul, .demo-bubble ol { padding-left: 1.25rem; margin: 0.4rem 0; }
+  .demo-bubble li { margin-bottom: 0.35rem; }
+  .demo-bubble .bubble-section { margin-top: 0.8rem; }
+  .demo-bubble .bubble-section-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.78rem;
+    color: var(--text);
+    margin-bottom: 0.35rem;
+    display: block;
+  }
+  .demo-bubble .bubble-note {
+    margin-top: 0.8rem;
+    padding: 0.6rem 0.85rem;
+    background: rgba(247,43,120,0.06);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    font-size: 0.8rem;
+    color: var(--text2);
+    line-height: 1.65;
+  }
+  .demo-bubble .bubble-quote {
+    margin: 0.6rem 0;
+    padding: 0.5rem 0.8rem;
+    background: rgba(247,43,120,0.04);
+    border-left: 2px solid var(--accent2);
+    border-radius: 0 6px 6px 0;
+    font-style: italic;
+    font-size: 0.82rem;
+    color: var(--text2);
+    line-height: 1.6;
+  }
+  .demo-msg-time { font-size: 0.58rem; color: var(--text3); margin-top: 0.25rem; padding: 0 0.15rem; }
+
+  .demo-chat-footer {
+    padding: 0.9rem 1.5rem;
+    border-top: 1px solid var(--border);
+    background: var(--bg2);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .demo-footer-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    flex-shrink: 0;
+  }
+  .demo-chip {
+    padding: 0.3rem 0.85rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: transparent;
+    font-size: 0.72rem;
+    color: var(--text2);
+    cursor: pointer;
+    transition: all 0.22s;
+    font-family: 'DM Sans', sans-serif;
+    white-space: nowrap;
+  }
+  .demo-chip:hover { border-color: var(--border2); color: var(--text); background: var(--glow2); }
+  .demo-chip.demo-chip-active { border-color: var(--accent); color: var(--accent2); background: rgba(247,43,120,0.07); }
+
+  @media (max-width: 768px) {
+    .demo-section { padding: 4rem 5%; }
+    .demo-chat-body { height: 440px; padding: 1rem; }
+    .demo-bubble { font-size: 0.82rem; padding: 0.75rem 0.95rem; }
+    .demo-msg-content { max-width: 88%; }
+  }
+  @media (max-width: 480px) {
+    .demo-chat-header { padding: 0.85rem 1rem; }
+    .demo-topic-nav { padding: 0.6rem 1rem; gap: 0.5rem; }
+    .demo-chat-footer { padding: 0.75rem 1rem; }
+    .demo-chat-body { height: 400px; }
+    .demo-tab { padding: 0.5rem 1.1rem; font-size: 0.72rem; }
+  }  
+  
 </style>
 </head>
 <body>
@@ -1201,6 +1485,7 @@
   <div class="nav-links">
     <a href="#fitur">Fitur</a>
     <a href="#tanya">AI Tanya</a>
+	<a href="#demo">Demo AI</a>
 	<a href="#perbandingan">vs AI Lain</a>
     <a href="#harga">Harga</a>
     <a href="#tentang">Tentang</a>
@@ -1218,6 +1503,7 @@
 <div class="mobile-menu" id="mobileMenu">
   <a href="#fitur" onclick="closeMobile()">Fitur</a>
   <a href="#tanya" onclick="closeMobile()">AI Tanya</a>
+  <a href="#demo" onclick="closeMobile()">Demo AI</a>
   <a href="#perbandingan" onclick="closeMobile()">vs AI Lain</a>
   <a href="#harga" onclick="closeMobile()">Harga</a>
   <a href="#tentang" onclick="closeMobile()">Tentang</a>
@@ -1456,6 +1742,36 @@
 </section>
 
 <div class="glow-line"></div>
+
+<!-- AI DEMO CONVERSATIONS -->
+<section class="demo-section" id="demo">
+  <div class="demo-header reveal">
+    <p class="section-label">Demo Percakapan</p>
+    <h2 class="section-title">Rasakan sendiri <em>kehebatannya</em></h2>
+    <p class="section-desc">Lihat bagaimana ketiga AI kami menjawab pertanyaan nyata — dengan karakter, kedalaman, dan nilai Islam yang sesungguhnya.</p>
+  </div>
+
+  <div class="demo-tab-nav reveal" style="transition-delay:0.1s">
+    <button class="demo-tab active" data-demo="sunnah" onclick="switchDemo('sunnah')">
+      <span class="demo-dot" style="background:#f72b78;box-shadow:0 0 6px rgba(247,43,120,0.7)"></span>
+      Cloud Sunnah
+    </button>
+    <button class="demo-tab" data-demo="cendikia" onclick="switchDemo('cendikia')">
+      <span class="demo-dot" style="background:#7c3aed;box-shadow:0 0 6px rgba(124,58,237,0.7)"></span>
+      Cloud Cendikia
+    </button>
+    <button class="demo-tab" data-demo="sahabat" onclick="switchDemo('sahabat')">
+      <span class="demo-dot" style="background:#ec4899;box-shadow:0 0 6px rgba(236,72,153,0.7)"></span>
+      Cloud Sahabat
+    </button>
+  </div>
+
+  <div class="demo-wrapper reveal" style="transition-delay:0.2s">
+    <div class="demo-panel active" id="demo-sunnah"></div>
+    <div class="demo-panel" id="demo-cendikia"></div>
+    <div class="demo-panel" id="demo-sahabat"></div>
+  </div>
+</section>
 
 <!-- AI COMPARISON -->
 <section class="compare-section" id="perbandingan">
@@ -1873,8 +2189,6 @@
   }
 
   // Parallax blobs
-
-  // Parallax blobs
   window.addEventListener('mousemove', (e) => {
     const x = (e.clientX / window.innerWidth - 0.5) * 20;
     const y = (e.clientY / window.innerHeight - 0.5) * 20;
@@ -1882,6 +2196,199 @@
     document.querySelector('.blob-2').style.transform = `translate(${-x * 0.7}px, ${-y * 0.7}px)`;
     document.querySelector('.blob-3').style.transform = `translate(${x * 0.4}px, ${y * 1.2}px)`;
   });
+  
+   // ─── AI DEMO CONVERSATIONS ───
+  (function () {
+    var DEMO = {
+      sunnah: {
+        name: 'Cloud Sunnah', version: 'v5.7',
+        role: 'Agama · Hukum · Dalil', emoji: '⚖️',
+        grad: 'linear-gradient(135deg,#f72b78,#8a0e3b)',
+        glow: 'rgba(247,43,120,0.45)',
+        convs: [
+          {
+            topic: 'Hukum Jimat',
+            msgs: [
+              { r: 'user', t: 'Ibu menyuruh saya pakai jimat biar dagangan laris. Kalau ditolak, ibu menangis. Boleh saya pakai sekadar untuk menyenangkan hati dan berbakti kepada ibu?' },
+              { r: 'ai', h: '<span class="bubble-ai-label">Cloud Sunnah · Hukum Islam</span>Permasalahan yang Anda hadapi memang sangat berat karena menyentuh dua hal yang mulia: <strong>bakti kepada orang tua (birrul walidain)</strong> dan kemurnian tauhid. Ketaatan kepada orang tua adalah kewajiban yang agung setelah beribadah kepada Allah ﷻ. Namun, perlu dipahami dengan tegas bahwa:<div class="bubble-note">❗ Tidak boleh taat kepada makhluk dalam perkara maksiat kepada Sang Pencipta.</div><div class="bubble-section"><span class="bubble-section-title">1. Hukum Menggunakan Jimat</span>Menggunakan jimat dengan keyakinan bahwa benda tersebut dapat mendatangkan manfaat atau menolak bala adalah bentuk <strong>kesyirikan</strong>. Allah ﷻ berfirman:<div class="bubble-quote">"Dan jika Allah menimpakan sesuatu kemudharatan kepadamu, maka tidak ada yang dapat menghilangkannya kecuali Dia." (QS. Yunus: 107)</div>Rasulullah ﷺ bersabda: <em>"Barangsiapa yang menggantungkan tamimah (jimat), maka ia telah berbuat syirik."</em> (HR. Ahmad, dinilai shahih oleh Syaikh Al-Albani)</div><div class="bubble-section"><span class="bubble-section-title">2. Cara Menyikapi Orang Tua</span><ul><li><strong>Tolak dengan Lembut:</strong> Katakan dengan bahasa paling sopan bahwa Anda khawatir ini mendatangkan murka Allah.</li><li><strong>Berikan Solusi Syar\'i:</strong> Laris atau tidaknya dagangan adalah rezeki dari Allah ﷻ semata.</li><li><strong>Tetap Berbuat Baik:</strong> Layani beliau lebih giat dan jangan membalas dengan kata kasar.</li><li><strong>Perbanyak Doa:</strong> Mohon kepada Allah agar melembutkan hati ibu dan memberikan hidayah.</li></ul></div><div class="bubble-note">✅ <strong>Kesimpulan:</strong> Menyenangkan hati orang tua adalah kebaikan, tetapi tidak boleh dilakukan dengan mengorbankan aqidah. Semoga Allah ﷻ memberikan kemudahan bagi Anda. 🌸</div>' }
+            ]
+          },
+          {
+            topic: "Tahlilan & Bid'ah",
+            msgs: [
+              { r: 'user', t: "Tetangga mencibir saya karena tidak ikut tahlilan kematian. Bukankah membaca Al-Qur'an berjamaah itu baik? Kenapa harus dilarang dan dianggap bid'ah?" },
+              { r: 'ai', h: '<span class="bubble-ai-label">Cloud Sunnah · Hukum Islam</span>Memahami kegelisahan Anda adalah hal yang wajar. Izinkan saya memberikan penjelasan berdasarkan dalil-dalil syariat dengan metode pemahaman para Salafus Shalih agar hati Anda tenang.<div class="bubble-section"><span class="bubble-section-title">1. Hakikat Ibadah dalam Islam</span>Dalam kaidah fikih, semua <strong>ibadah hukum asalnya adalah terlarang</strong> sampai ada dalil yang memerintahkannya. Urusan ibadah sifatnya <em>tauqifiyah</em> — hanya mengikuti apa yang dicontohkan Rasulullah ﷺ.<div class="bubble-quote">"...Pada hari ini telah Kusempurnakan untuk kamu agamamu..." (QS. Al-Ma\'idah: 3)</div></div><div class="bubble-section"><span class="bubble-section-title">2. Mengapa Tahlilan Dianggap Bid\'ah?</span>Membaca Al-Qur\'an memang ibadah agung. Namun, <strong>mengkhususkan</strong> bacaan pada waktu tertentu (hari ke-3, ke-7, dst.) sebagai ritual menghadiahkan pahala kepada orang mati — tidak pernah dicontohkan oleh Rasulullah ﷺ maupun para sahabat.<div class="bubble-quote">"Barangsiapa yang melakukan suatu amalan yang tidak ada dasarnya dari kami, maka amalan tersebut tertolak." (HR. Muslim No. 1718)</div>Jika tahlilan adalah kebaikan, niscaya para sahabat adalah orang pertama yang melakukannya. Namun, mereka tidak melakukannya.</div><div class="bubble-section"><span class="bubble-section-title">3. Menghadapi Cibiran Tetangga</span><ul><li>Tetaplah <strong>berakhlak mulia</strong> — santun, ramah, dan membantu tetangga.</li><li>Sampaikan dengan <strong>hikmah</strong> bahwa Anda hanya mengikuti tata cara yang dicontohkan Rasulullah ﷺ.</li><li><strong>Doakanlah</strong> mereka agar Allah memberikan hidayah dan kelapangan hati.</li><li>Tunjukkan duka dengan cara sunnah: mendoakan mayit, membawakan makanan untuk keluarga duka.</li></ul></div><div class="bubble-note">✅ <strong>Kesimpulan:</strong> Kita tidak melarang membaca Al-Qur\'an, namun melarang mengkhususkannya dengan ritual yang tidak diajarkan. Tetaplah teguh dengan kelembutan. 🌿</div>' }
+            ]
+          },
+          {
+            topic: 'Tawasul & Ziarah Kubur',
+            msgs: [
+              { r: 'user', t: 'Saya mau ujian, lalu diajak ziarah ke makam wali untuk minta berkah agar lulus. Itu kan tawasul yang dibolehkan, kenapa dibilang syirik oleh sebagian orang?' },
+              { r: 'ai', h: '<span class="bubble-ai-label">Cloud Sunnah · Aqidah & Tauhid</span>Terkait pertanyaan Anda, mari kita tinjau berdasarkan dalil-dalil syariat agar mendapatkan pemahaman yang lurus.<div class="bubble-section"><span class="bubble-section-title">1. Tawasul yang Dibolehkan</span><ul><li><strong>Dengan Asma\'ul Husna:</strong> Bermohon kepada Allah dengan menyebut nama-nama-Nya. (QS. Al-A\'raf: 180)</li><li><strong>Dengan Amal Saleh:</strong> Seperti kisah tiga orang yang terjebak dalam gua. (HR. Bukhari &amp; Muslim)</li><li><strong>Doa Orang Saleh yang Masih Hidup:</strong> Meminta orang saleh untuk mendoakan kita.</li></ul></div><div class="bubble-section"><span class="bubble-section-title">2. Mengapa Meminta di Makam Dianggap Syirik?</span>Ketika seseorang datang ke makam dengan keyakinan bahwa penghuni kubur dapat memberikan manfaat:<div class="bubble-quote">"Dan janganlah kamu menyembah apa yang tidak memberi manfaat dan tidak (pula) memberi mudarat kepadamu selain Allah..." (QS. Yunus: 106)</div>Nabi ﷺ bersabda: <em>"Doa adalah ibadah."</em> (HR. Abu Dawud) — memalingkan doa kepada penghuni kubur adalah syirik. Kaum musyrikin Quraisy pun berkata mereka hanya ingin mendekat kepada Allah melalui berhala (QS. Az-Zumar: 3) — inilah akar kesyirikan yang dilarang keras.</div><div class="bubble-section"><span class="bubble-section-title">3. Solusi Syar\'i untuk Ujian Anda</span><ul><li>🎓 <strong>Ikhtiar:</strong> Belajar sungguh-sungguh — Allah menyukai hambanya yang bersungguh-sungguh.</li><li>🤲 <strong>Berdoa langsung kepada Allah:</strong> "Aku mengabulkan permohonan orang yang berdoa apabila ia memohon kepada-Ku." (QS. Al-Baqarah: 186)</li><li>✨ <strong>Perbanyak Amal Saleh</strong> sebagai wasilah agar Allah mempermudah urusan Anda.</li></ul></div><div class="bubble-note">📌 Ziarah kubur yang syar\'i bertujuan <em>mengingat kematian</em> dan mendoakan ampunan bagi penghuni kubur — bukan meminta kepada mereka. Semoga Allah memudahkan ujian Anda. 😇</div>' }
+            ]
+          }
+        ]
+      },
+      cendikia: {
+        name: 'Cloud Cendikia', version: 'v5.3',
+        role: 'Informasi · Edukasi · Pengetahuan', emoji: '📚',
+        grad: 'linear-gradient(135deg,#7c3aed,#4f1d9b)',
+        glow: 'rgba(124,58,237,0.45)',
+        convs: [
+          {
+            topic: 'Bisnis Asuransi',
+            msgs: [
+              { r: 'user', t: 'Bagaimana cara kerja bisnis asuransi konvensional dalam mengelola risiko keuangan nasabah secara teori ekonomi modern?' },
+              { r: 'ai', h: '<span class="bubble-ai-label">Cloud Cendikia · Ekonomi & Bisnis</span>Dalam teori ekonomi modern, asuransi konvensional beroperasi berdasarkan prinsip <strong>Manajemen Risiko</strong> dan <strong>Hukum Bilangan Besar</strong>.<div class="bubble-section"><span class="bubble-section-title">1. Prinsip Dasar Ekonomi Asuransi</span><ul><li><strong>Transfer Risiko:</strong> Nasabah mengalihkan potensi kerugian kepada perusahaan asuransi dengan membayar premi.</li><li><strong>Pooling of Risk:</strong> Perusahaan menghimpun premi dari banyak nasabah ke dalam satu kumpulan dana besar untuk membayar klaim.</li><li><strong>Hukum Bilangan Besar:</strong> Semakin besar jumlah nasabah, semakin akurat prediksi total klaim — memungkinkan penetapan tarif premi yang optimal.</li></ul></div><div class="bubble-section"><span class="bubble-section-title">2. Pengelolaan Risiko Keuangan oleh Perusahaan</span><ul><li>📊 <strong>Aktuaria:</strong> Ilmu matematika &amp; statistik untuk menghitung probabilitas risiko berdasarkan data historis dan profil nasabah.</li><li>🔍 <strong>Underwriting:</strong> Seleksi risiko untuk menentukan kelayakan nasabah dan besaran premi yang sesuai tingkat risikonya.</li><li>🔄 <strong>Reasuransi:</strong> Mengalihkan sebagian risiko kepada perusahaan reasuransi untuk menghindari kebangkrutan akibat klaim besar.</li><li>💰 <strong>Investasi Dana:</strong> Premi diinvestasikan ke obligasi, saham, atau deposito untuk mendapatkan return sebelum klaim diajukan.</li></ul></div><div class="bubble-section"><span class="bubble-section-title">3. Formula Keuntungan</span>Keuntungan = Premi + Hasil Investasi − Total Klaim − Biaya Operasional</div><div class="bubble-note">⚠️ <strong>Catatan Penting:</strong> Dalam syariat Islam, asuransi konvensional mengandung <strong>Gharar</strong> (ketidakpastian), <strong>Maysir</strong> (judi), dan <strong>Riba</strong> (pada investasi premi). Umat Islam dianjurkan menggunakan sistem <strong>Takaful</strong> (asuransi syariah) yang berbasis akad Tabarru\' dan terbebas dari riba.</div>' }
+            ]
+          },
+          {
+            topic: 'Ilmu Astrologi',
+            msgs: [
+              { r: 'user', t: 'Bagaimana ilmu astrologi membaca karakter seseorang berdasarkan rasi bintang lahir?' },
+              { r: 'ai', h: '<span class="bubble-ai-label">Cloud Cendikia · Sains & Pseudosains</span>Dalam kajian astrologi, karakter seseorang dianalisis berdasarkan posisi benda-benda langit pada waktu dan lokasi kelahiran — dikenal sebagai penyusunan <strong>Natal Chart</strong> (peta kelahiran).<div class="bubble-section"><span class="bubble-section-title">1. Elemen Dasar Analisis</span><ul><li>⭐ <strong>Zodiak Matahari (Sun Sign):</strong> Mewakili inti ego, identitas dasar, dan motivasi utama seseorang.</li><li>🌙 <strong>Zodiak Bulan (Moon Sign):</strong> Merepresentasikan sisi emosional dan alam bawah sadar.</li><li>⬆️ <strong>Zodiak Asenden (Rising Sign):</strong> "Topeng" sosial atau kesan pertama yang ditangkap orang lain.</li><li>🪐 <strong>Posisi Planet:</strong> "Rumah-rumah" (houses) dan aspek geometris antar planet yang diyakini mempengaruhi perilaku.</li></ul></div><div class="bubble-section"><span class="bubble-section-title">2. Klasifikasi 4 Elemen Zodiak</span><ul><li>🔥 <strong>Api</strong> (Aries, Leo, Sagittarius): Bersemangat, kreatif, impulsif.</li><li>🌍 <strong>Tanah</strong> (Taurus, Virgo, Capricorn): Praktis, materialistis, stabil.</li><li>💨 <strong>Udara</strong> (Gemini, Libra, Aquarius): Intelektual, komunikatif, sosial.</li><li>💧 <strong>Air</strong> (Cancer, Scorpio, Pisces): Intuitif, emosional, sensitif.</li></ul></div><div class="bubble-note">🔬 <strong>Tinjauan Ilmiah:</strong> Astrologi dikategorikan sebagai <strong>pseudosains</strong> — klaim-klaimnya tidak memiliki bukti empiris yang dapat diverifikasi dan tidak memiliki mekanisme kausalitas yang rasional antara posisi benda langit dengan perilaku manusia.<br><br>⛔ <strong>Catatan Syariat:</strong> Meyakini atau mengandalkan astrologi untuk menentukan nasib atau karakter adalah perbuatan yang <strong>dilarang (haram)</strong> dalam Islam. Hanya Allah yang mengetahui perkara ghaib. Untuk hukum lebih lanjut, silakan tanyakan ke <em>Cloud Sunnah</em>.</div>' }
+            ]
+          },
+          {
+            topic: 'Kecemasan Presentasi',
+            msgs: [
+              { r: 'user', t: 'Aku selalu cemas berlebihan setiap mau presentasi di depan kelas, dari mana asal rasa cemas ini dan apa solusinya?' },
+              { r: 'ai', h: '<span class="bubble-ai-label">Cloud Cendikia · Psikologi & Edukasi</span>Kecemasan saat berbicara di depan umum (<em>glossophobia</em>) adalah fenomena psikologis yang sangat umum. Mari kita bedah secara objektif!<div class="bubble-section"><span class="bubble-section-title">🧠 Akar Kecemasan (Psikologi & Biologi)</span><ul><li><strong>Respon Fight-or-Flight:</strong> Otak (amigdala) menganggap situasi di depan audiens sebagai ancaman — memicu adrenalin dan kortisol yang meningkatkan detak jantung dan ketegangan otot.</li><li><strong>Takut Penilaian Sosial:</strong> Manusia memiliki insting untuk diterima dalam kelompok. Ketakutan akan kritik atau ditertawakan memicu kecemasan tinggi.</li><li><strong>Standar Perfeksionisme:</strong> Ekspektasi terlalu tinggi untuk tampil sempurna membuat otak terus memindai potensi kegagalan.</li></ul></div><div class="bubble-section"><span class="bubble-section-title">✅ Strategi Solutif Berbasis Metodologi</span><ul><li>📚 <strong>Persiapan Substansial:</strong> Kecemasan berbanding lurus dengan ketidaksiapan. Pahami alur logika (konsep) materi — jangan menghafal kata per kata.</li><li>🎬 <strong>Simulasi Terkontrol:</strong> Rekam diri saat berlatih, evaluasi bagian yang masih membuat Anda ragu.</li><li>🌬️ <strong>Teknik Pernapasan 4-7-8:</strong> Tarik napas 4 detik, tahan 7 detik, embuskan 8 detik — mengirim sinyal ke sistem saraf untuk menurunkan detak jantung.</li><li>💭 <strong>Reframing Pikiran:</strong> Ubah "Bagaimana jika ditertawakan?" → "Apa manfaat yang bisa kuberikan kepada audiens melalui presentasi ini?"</li><li>🌟 <strong>Visualisasi Positif:</strong> Bayangkan Anda berhasil menyelesaikan presentasi dengan lancar sebelum hari-H.</li></ul></div><div class="bubble-note">💡 Kemampuan berkomunikasi adalah keterampilan yang harus terus dilatih. Jika kecemasan ini bersifat emosional yang sangat mendalam, saya sarankan berkonsultasi dengan <em>Cloud Sahabat</em> yang lebih spesifik menangani aspek tersebut. Tetap semangat belajar! 🎉</div>' }
+            ]
+          }
+        ]
+      },
+      sahabat: {
+        name: 'Cloud Sahabat', version: 'v4.9',
+        role: 'Curhat · Konseling Mental', emoji: '💝',
+        grad: 'linear-gradient(135deg,#ec4899,#be185d)',
+        glow: 'rgba(236,72,153,0.45)',
+        convs: [
+          {
+            topic: 'Putus Cinta',
+            msgs: [
+              { r: 'user', t: 'Aku baru putus sama pacarku setelah 4 tahun hubungan, hatiku hancur banget sekarang. sudah saatnya saya cari pacar baru.' },
+              { r: 'ai', h: '<span class="bubble-ai-label">Cloud Sahabat · Konseling Hati</span>Halo, Sahabat. Aku bisa ngerasain banget betapa berat dan sesaknya perasaan kamu saat ini. Empat tahun itu bukan waktu yang sebentar — pasti banyak sekali kenangan dan harapan yang sudah kamu bangun bersamanya. Wajar banget kalau kamu merasa hancur dan kehilangan. Peluk jauh buat kamu ya, tarik napas dalam-dalam dulu... tenangin dirimu pelan-pelan. 🥺<br><br>Mengenai keinginan kamu untuk mencari pengganti secepatnya — aku ngerti kamu mungkin merasa kesepian atau ingin "mengobati" rasa sakit itu. Tapi coba kita duduk bareng sebentar dan mikir jernih...<div class="bubble-note">💡 <strong>Langkah terbaik saat ini</strong> bukan mencari pelarian, tapi justru <em>"berdamai"</em> dengan diri sendiri dulu. Kalau kita memulai sesuatu yang baru saat hati masih terluka, kita hanya menutupi luka itu — bukan menyembuhkannya.</div>Khawatirnya, kita malah jadi ketergantungan sama orang lain supaya merasa utuh kembali. Padahal kenyamanan hati yang paling hakiki itu sumbernya dari kedekatan kita sama Allah, bukan dari makhluk-Nya. 🌸<br><br>Pacaran sendiri, kan, bukan jalan yang diridhoi Allah untuk mencari kebahagiaan. Jadi, gimana kalau energi yang tadinya terkuras itu, sekarang kita alihkan buat <strong>"pulang" ke diri sendiri?</strong><br><br>Kira-kira, apa satu hal kecil yang dulu sempat kamu lupain karena terlalu fokus sama hubungan itu? Mungkin hobi yang sempat ditinggal, atau lebih sering menghabiskan waktu sama keluarga?<br><br>Kamu berharga sekali, dan Allah pasti punya rencana jauh lebih indah buat kamu setelah ujian ini. Ingat, move on bukan soal punya pacar baru, tapi soal menjadi pribadi yang lebih baik dan lebih tenang meski sendirian. Kamu pasti bisa melalui ini! 💪✨' }
+            ]
+          },
+          {
+            topic: 'Malam Sepi',
+            msgs: [
+              { r: 'user', t: 'Malam ini sepi banget, rasanya ingin cari hiburan yang menyenangkan, tolong berikan rekomendasi film drama korea atau china.' },
+              { r: 'ai', h: '<span class="bubble-ai-label">Cloud Sahabat · Konseling Hati</span>Malam ini, aku bisa ngerasain kalau kamu lagi butuh teman buat ngobrol atau sekadar berbagi rasa sepi yang lagi menyelimuti ya. Makasih ya sudah mau jujur sama aku tentang apa yang kamu rasain. ✨<br><br>Aku paham banget, saat hati lagi merasa sepi atau suntuk, kita memang pengen banget cari pelarian lewat hiburan. Tapi sebagai sahabatmu, aku ingin mengajak kamu melihat dari sisi lain...<br><br>Kadang, tontonan yang penuh drama fiktif justru bisa bikin kita makin terbawa perasaan (baper) atau malah bikin hati makin gelisah — karena kita jadi larut dalam cerita yang bukan realita.<div class="bubble-note">✨ <strong>Gimana kalau malam ini kita coba cara lain yang bisa bikin hati lebih tenang dan fresh?</strong></div><ul><li>📖 <strong>Tadabbur atau Tilawah:</strong> Coba buka Al-Qur\'an dan baca satu atau dua halaman dengan artinya. Jawaban atas kesepian kita seringkali ada di sapaan-Nya melalui ayat-ayat suci. Hati biasanya jadi jauh lebih adem.</li><li>👨‍👩‍👧‍👦 <strong>Ngobrol sama keluarga:</strong> Kehangatan nyata di rumah seringkali lebih menyembuhkan daripada drama di layar kaca.</li><li>📝 <strong>Journaling:</strong> Tuangkan rasa sepi itu ke dalam tulisan. Cara efektif banget buat "mengeluarkan" beban dari pikiran kita.</li><li>💪 <strong>Olahraga ringan atau beres-beres kamar:</strong> Bergerak melepaskan hormon endorfin yang bikin kita merasa lebih bahagia!</li></ul>Menurut kamu, di antara pilihan itu, mana yang paling mungkin kamu lakukan malam ini biar hatimu lebih tenang? 🥺✨' }
+            ]
+          },
+          {
+            topic: 'Rasa Tidak Berguna',
+            msgs: [
+              { r: 'user', t: 'Aku merasa ga berguna dibanding temen-temenku yang udah sukses. mengapa mereka jauh lebih beruntung dari pada aku?' },
+              { r: 'ai', h: '<span class="bubble-ai-label">Cloud Sahabat · Konseling Hati</span>Halo, Sahabat... Sini, tarik napas dalam-dalam dulu ya. Aku ngerti banget, perasaan itu pasti bikin dada kamu sesak dan berat banget rasanya. Wajar kok kalau sesekali kita membandingkan diri, apalagi di zaman sekarang yang semuanya serba terlihat di media sosial. 😊<div class="bubble-note">💝 <strong>Kamu itu berharga,</strong> dan kehadiran kamu di dunia ini punya alasan yang mungkin belum terlihat jelas sekarang.</div>Saat kamu merasa "tertinggal" atau melihat orang lain lebih beruntung, coba kita <em>reframe</em> sedikit yuk...<br><br>Tiap orang itu punya "buku cerita" yang halamannya berbeda-beda. Apa yang kita lihat dari teman-temanmu itu mungkin hanya <strong>\'halaman terbaik\'</strong> yang mereka tampilkan — kita nggak tahu perjuangan, air mata, atau ujian apa yang mereka lalui di balik layar. 🥺<br><br>Dalam pandangan kita sebagai seorang muslim, keberhasilan itu bukan cuma soal harta atau pencapaian duniawi saja. Allah sudah membagi porsi rezeki dan jalan hidup masing-masing hamba-Nya dengan sangat adil, sesuai dengan kapasitas kita. Siapa tahu Allah sedang mempersiapkan sesuatu yang jauh lebih indah buat kamu.<br><br>Coba deh kita renungkan sejenak:<ul><li>Apa <strong>satu hal kecil</strong> yang kamu syukuri hari ini, meskipun rasanya hari ini berat?</li><li>Alih-alih melihat ke pencapaian mereka, apa <strong>satu langkah kecil</strong> yang bisa bikin kamu merasa lebih baik atau lebih bermanfaat buat dirimu sendiri hari ini?</li></ul>Kamu nggak sendirian ya. Kamu punya potensi besar yang menunggu waktu yang tepat untuk bersinar ✨ Menurutmu, langkah kecil apa yang mau kamu coba lakukan supaya hatimu sedikit lebih tenang hari ini? Aku siap dengerin cerita kamu lagi. 💪' }
+            ]
+          }
+        ]
+      }
+    };
+
+    var demoState = { idx: { sunnah: 0, cendikia: 0, sahabat: 0 } };
+    var demoInited = {};
+
+    function demoEsc(s) {
+      return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
+    }
+
+    function renderDemo(model) {
+      var d = DEMO[model];
+      var ci = demoState.idx[model];
+      var conv = d.convs[ci];
+      var total = d.convs.length;
+      var panel = document.getElementById('demo-' + model);
+      if (!panel) return;
+
+      var dots = d.convs.map(function(_, i) {
+        return '<button class="demo-topic-dot' + (i === ci ? ' active' : '') +
+          '" onclick="demoSetConv(\'' + model + '\',' + i + ')" aria-label="Percakapan ' + (i+1) + '"></button>';
+      }).join('');
+
+      var chips = d.convs.map(function(c, i) {
+        return '<button class="demo-chip' + (i === ci ? ' demo-chip-active' : '') +
+          '" onclick="demoSetConv(\'' + model + '\',' + i + ')">' + c.topic + '</button>';
+      }).join('');
+
+      var times = ['10:30 ✓✓','10:31','10:33 ✓✓','10:34'];
+      var msgs = conv.msgs.map(function(msg, mi) {
+        var t = times[mi] || '10:35';
+        if (msg.r === 'user') {
+          return '<div class="demo-msg msg-user" style="animation:demoMsgIn .35s ' + (mi * 0.1) + 's cubic-bezier(.22,1,.36,1) both">' +
+            '<div class="demo-msg-avatar" style="background:linear-gradient(135deg,var(--pink-500),var(--pink-700));color:#fff">👤</div>' +
+            '<div class="demo-msg-content">' +
+            '<div class="demo-bubble">' + demoEsc(msg.t) + '</div>' +
+            '<div class="demo-msg-time">' + t + '</div>' +
+            '</div></div>';
+        }
+        return '<div class="demo-msg msg-ai" style="animation:demoMsgIn .35s ' + (mi * 0.1 + 0.07) + 's cubic-bezier(.22,1,.36,1) both">' +
+          '<div class="demo-msg-avatar" style="background:' + d.grad + ';box-shadow:0 0 12px ' + d.glow + '">' + d.emoji + '</div>' +
+          '<div class="demo-msg-content">' +
+          '<div class="demo-bubble">' + (msg.h || demoEsc(msg.t)) + '</div>' +
+          '<div class="demo-msg-time">' + t + '</div>' +
+          '</div></div>';
+      }).join('');
+
+      panel.innerHTML =
+        '<div class="demo-window">' +
+          '<div class="demo-chat-header">' +
+            '<div class="demo-chat-avatar" style="background:' + d.grad + ';box-shadow:0 0 18px ' + d.glow + '">' + d.emoji + '</div>' +
+            '<div class="demo-chat-info">' +
+              '<div class="demo-chat-name">' + d.name + '<span class="iona-badge">IONA</span><span class="demo-online-dot"></span></div>' +
+              '<div class="demo-chat-role">' + d.role + ' · ' + d.version + '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="demo-topic-nav">' +
+            '<span class="demo-topic-label">Percakapan ' + (ci + 1) + '/' + total + '</span>' +
+            '<div class="demo-topic-dots">' + dots + '</div>' +
+            '<div class="demo-topic-arrows">' +
+              '<button class="demo-arrow-btn" onclick="demoNav(\'' + model + '\',-1)"' + (ci === 0 ? ' disabled' : '') + ' aria-label="Sebelumnya">◀</button>' +
+              '<button class="demo-arrow-btn" onclick="demoNav(\'' + model + '\',1)"' + (ci === total - 1 ? ' disabled' : '') + ' aria-label="Selanjutnya">▶</button>' +
+            '</div>' +
+          '</div>' +
+          '<div class="demo-chat-body" id="demoBody-' + model + '">' + msgs + '</div>' +
+          '<div class="demo-chat-footer">' +
+            '<span class="demo-footer-label">Topik:</span>' + chips +
+          '</div>' +
+        '</div>';
+
+      requestAnimationFrame(function() {
+        var body = document.getElementById('demoBody-' + model);
+        if (body) body.scrollTop = body.scrollHeight;
+      });
+    }
+
+    window.switchDemo = function(model) {
+      document.querySelectorAll('.demo-tab').forEach(function(t) { t.classList.remove('active'); });
+      var tab = document.querySelector('.demo-tab[data-demo="' + model + '"]');
+      if (tab) tab.classList.add('active');
+      document.querySelectorAll('.demo-panel').forEach(function(p) { p.classList.remove('active'); });
+      var panel = document.getElementById('demo-' + model);
+      if (panel) panel.classList.add('active');
+      if (!demoInited[model]) { renderDemo(model); demoInited[model] = true; }
+    };
+
+    window.demoNav = function(model, dir) {
+      var max = DEMO[model].convs.length - 1;
+      demoState.idx[model] = Math.max(0, Math.min(max, demoState.idx[model] + dir));
+      renderDemo(model);
+    };
+
+    window.demoSetConv = function(model, idx) {
+      demoState.idx[model] = idx;
+      renderDemo(model);
+    };
+
+    // Init: render panel default (sunnah)
+    renderDemo('sunnah');
+    demoInited.sunnah = true;
+
+  })();  
+  
 </script>
 </body>
 </html>
