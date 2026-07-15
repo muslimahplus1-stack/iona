@@ -8,6 +8,8 @@
 <meta name="google-site-verification" content="1vfyybS4uaJLTXoGMHQhq5yhfsIri7RqSnB35jd_KVI" />	
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://i.ytimg.com">
+<link rel="preconnect" href="https://www.youtube.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -1464,6 +1466,131 @@
     .demo-chat-body { height: 400px; }
     .demo-tab { padding: 0.5rem 1.1rem; font-size: 0.72rem; }
   }  
+
+  /* ─── VIDEO INTRO SECTION (Pengenalan Aplikasi) ─── */
+  .video-intro-section { padding: 1rem 5% 6rem; }
+  .video-intro-header { text-align: center; max-width: 640px; margin: 0 auto 3rem; }
+  .video-intro-header .section-desc { margin: 0 auto; }
+
+  .video-intro-frame-wrap {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .video-intro-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--r2);
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    box-shadow: var(--shadow-featured);
+    transition: box-shadow 0.4s ease, transform 0.4s ease;
+  }
+  .video-intro-frame:hover { box-shadow: var(--shadow-featured-hover); transform: translateY(-4px); }
+  .video-intro-frame:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+  .video-intro-frame.is-playing { cursor: default; }
+  .video-intro-frame iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+  .video-intro-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: saturate(1.05) brightness(0.85);
+    transition: transform 0.6s ease, filter 0.4s ease;
+  }
+  .video-intro-frame:hover .video-intro-thumb { transform: scale(1.05); filter: saturate(1.15) brightness(0.75); }
+
+  .video-intro-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    background: linear-gradient(180deg, rgba(10,4,8,0.15) 0%, rgba(10,4,8,0.55) 100%);
+  }
+
+  .video-play-btn {
+    position: relative;
+    width: 78px; height: 78px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, var(--pink-400), var(--pink-700));
+    box-shadow: 0 0 30px var(--glow), 0 8px 30px rgba(0,0,0,0.4);
+    transition: transform 0.3s cubic-bezier(.22,1,.36,1), box-shadow 0.3s ease;
+  }
+  .video-play-btn svg { margin-left: 3px; }
+  .video-intro-frame:hover .video-play-btn { transform: scale(1.1); box-shadow: 0 0 50px var(--glow), 0 10px 40px rgba(0,0,0,0.5); }
+
+  .video-play-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.5);
+    animation: videoPulse 2.2s ease-out infinite;
+  }
+  @keyframes videoPulse {
+    0% { transform: scale(1); opacity: 0.7; }
+    100% { transform: scale(1.6); opacity: 0; }
+  }
+
+  .video-play-label {
+    color: #fff;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  }
+
+  .video-badge-float {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1.1rem;
+    border-radius: 999px;
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    font-family: 'Syne', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--accent2);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    z-index: 2;
+    animation: videoFloat 5s ease-in-out infinite;
+    white-space: nowrap;
+  }
+  .badge-a { top: -18px; left: 4%; animation-delay: 0s; }
+  .badge-b { bottom: -18px; right: 4%; animation-delay: -2.5s; }
+
+  @keyframes videoFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @media (max-width: 768px) {
+    .video-intro-section { padding: 0.5rem 5% 4rem; }
+    .video-intro-header { margin-bottom: 2rem; }
+    .video-play-btn { width: 60px; height: 60px; }
+    .video-badge-float { font-size: 0.68rem; padding: 0.4rem 0.85rem; }
+    .badge-a { top: -14px; left: 2%; }
+    .badge-b { bottom: -14px; right: 2%; }
+  }
+  @media (max-width: 480px) {
+    .video-badge-float { display: none; }
+    .video-intro-frame { border-radius: var(--r); }
+  }
   
 </style>
 </head>
@@ -1522,6 +1649,40 @@
   <div class="hero-cta">
     <a href="#harga" class="btn-xl primary">🌸 Sewa Aplikasi — Mulai Rp6.000/bln</a>
     <a href="#fitur" class="btn-xl ghost">Lihat Fitur →</a>
+  </div>
+</section>
+
+<!-- VIDEO INTRO: Pengenalan Aplikasi IONA -->
+<section class="video-intro-section" id="pengenalan">
+  <div class="video-intro-header reveal">
+    <p class="section-label">Kenalan Yuk</p>
+    <h2 class="section-title">Lihat <em>IONA</em> dalam Aksi</h2>
+    <p class="section-desc">Video singkat pengenalan aplikasi IONA — apa saja isinya, dan bagaimana ia menemani harimu dengan konten islami yang bersih dan menentramkan.</p>
+  </div>
+
+  <div class="video-intro-frame-wrap reveal" style="transition-delay:0.1s">
+    <div class="video-badge-float badge-a" aria-hidden="true">🎬 Video Resmi</div>
+    <div class="video-badge-float badge-b" aria-hidden="true">✨ Kenali Fiturnya</div>
+
+    <div class="video-intro-frame"
+         id="ionaVideoFrame"
+         data-video-id="Hfz9_3Yl4XU"
+         role="button"
+         tabindex="0"
+         aria-label="Putar video pengenalan aplikasi IONA">
+      <img class="video-intro-thumb"
+           src="https://i.ytimg.com/vi/Hfz9_3Yl4XU/maxresdefault.jpg"
+           alt="Thumbnail video pengenalan aplikasi IONA"
+           loading="lazy"
+           decoding="async"
+           onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/Hfz9_3Yl4XU/hqdefault.jpg';">
+      <div class="video-intro-overlay">
+        <span class="video-play-btn" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
+        </span>
+        <span class="video-play-label">Putar Video Pengenalan</span>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -2198,6 +2359,38 @@
     document.querySelector('.blob-2').style.transform = `translate(${-x * 0.7}px, ${-y * 0.7}px)`;
     document.querySelector('.blob-3').style.transform = `translate(${x * 0.4}px, ${y * 1.2}px)`;
   });
+  
+
+  // ─── VIDEO INTRO: Lazy-load Facade (hemat kuota & anti-lag di hp kentang) ───
+  (function () {
+    const frame = document.getElementById('ionaVideoFrame');
+    if (!frame) return;
+
+    function loadVideo() {
+      if (frame.classList.contains('is-playing')) return;
+      const videoId = frame.getAttribute('data-video-id');
+      const iframe = document.createElement('iframe');
+      iframe.src = 'https://youtube.com/embed/' + videoId + '?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+      iframe.title = 'Video Pengenalan Aplikasi IONA';
+      iframe.setAttribute('frameborder', '0');
+      iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+      iframe.allowFullscreen = true;
+      frame.classList.add('is-playing');
+      frame.setAttribute('aria-label', 'Video Pengenalan Aplikasi IONA sedang diputar');
+      frame.removeAttribute('role');
+      frame.removeAttribute('tabindex');
+      frame.innerHTML = '';
+      frame.appendChild(iframe);
+    }
+
+    frame.addEventListener('click', loadVideo);
+    frame.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        loadVideo();
+      }
+    });
+  })();
   
    // ─── AI DEMO CONVERSATIONS ───
   (function () {
