@@ -2,6 +2,13 @@
 <html lang="id" data-theme="dark">
 <head>
 <meta charset="UTF-8">
+<script>
+  (function() {
+    if (localStorage.getItem('iona-theme') === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  })();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IONA — Konten Islam yang Murni</title>
 <link rel="icon" type="image/png" href="favicon.png">	
@@ -222,6 +229,9 @@
     transition: all 0.25s;
     text-decoration: none;
     display: inline-block;
+    text-align: center;
+    white-space: nowrap;
+    flex-shrink: 0;
     box-shadow: 0 0 20px var(--glow);
   }
   .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 0 35px var(--glow), 0 4px 20px rgba(0,0,0,0.3); }
@@ -2338,9 +2348,7 @@
  // Theme Toggle
   const html = document.documentElement;
   const btn = document.getElementById('themeToggle');
-  const savedTheme = localStorage.getItem('iona-theme');
-  let dark = savedTheme ? savedTheme === 'dark' : true;
-  html.setAttribute('data-theme', dark ? 'dark' : 'light');
+  let dark = html.getAttribute('data-theme') !== 'light';
   btn.setAttribute('aria-pressed', String(dark));
   btn.setAttribute('aria-label', dark ? 'Ganti ke tema terang' : 'Ganti ke tema gelap');
 
