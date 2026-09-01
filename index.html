@@ -133,29 +133,34 @@
     opacity: 0.35;
   }
 
-  /* ─── AMBIENT BLOBS ─── */
+  /* ─── AMBIENT BLOBS (GPU-Optimized & Light on Mobile) ─── */
   .blob-container {
     position: fixed;
     inset: 0;
     pointer-events: none;
     z-index: 0;
     overflow: hidden;
+    contain: strict;
   }
   .blob {
     position: absolute;
     border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.18;
-    animation: drift 20s ease-in-out infinite alternate;
+    filter: blur(60px);
+    opacity: 0.16;
+    transform: translate3d(0,0,0);
+    animation: drift 22s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
   }
-  [data-theme="light"] .blob { opacity: 0.22; }
-  .blob-1 { width: 600px; height: 600px; background: var(--pink-400); top: -200px; right: -100px; animation-delay: 0s; }
-  .blob-2 { width: 400px; height: 400px; background: var(--pink-600); bottom: 20%; left: -150px; animation-delay: -7s; }
-  .blob-3 { width: 300px; height: 300px; background: var(--pink-300); top: 40%; right: 20%; animation-delay: -14s; }
+  [data-theme="light"] .blob { opacity: 0.18; }
+  .blob-1 { width: min(550px, 90vw); height: min(550px, 90vw); background: var(--pink-400); top: -150px; right: -80px; animation-delay: 0s; }
+  .blob-2 { width: min(380px, 75vw); height: min(380px, 75vw); background: var(--pink-600); bottom: 15%; left: -100px; animation-delay: -7s; }
+  .blob-3 { width: min(280px, 60vw); height: min(280px, 60vw); background: var(--pink-300); top: 45%; right: 15%; animation-delay: -14s; }
 
   @keyframes drift {
-    from { transform: translate(0,0) scale(1); }
-    to { transform: translate(40px,60px) scale(1.05); }
+    0% { transform: translate3d(0, 0, 0) scale(1); }
+    100% { transform: translate3d(30px, 45px, 0) scale(1.04); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .blob { animation: none; }
   }
 
   /* ─── NAV ─── */
@@ -561,16 +566,29 @@
   }
 
   .feature-icon {
-    width: 48px; height: 48px;
-    border-radius: 14px;
-    background: linear-gradient(135deg, var(--pink-500), var(--pink-800));
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(247,43,120,0.15), rgba(217,26,98,0.05));
+    border: 1px solid var(--border2);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.3rem;
     margin-bottom: 1.2rem;
-    box-shadow: 0 0 20px rgba(247,43,120,0.3);
+    box-shadow: 0 4px 16px var(--glow2);
     position: relative;
+    color: var(--accent2);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s;
+  }
+  .feature-card:hover .feature-icon {
+    transform: scale(1.08) translateY(-2px);
+    background: linear-gradient(135deg, var(--pink-500), var(--pink-700));
+    color: #ffffff;
+    border-color: transparent;
+  }
+  .feature-icon svg {
+    width: 22px;
+    height: 22px;
+    stroke-width: 1.8;
   }
 
   .feature-name {
@@ -1695,8 +1713,8 @@
   <p class="hero-sub">Islamic Online Network App</p>
   <p class="hero-desc">Platform konten islami yang dikurasi selaras dengan manhaj salaf, Al-Qur'an dan Sunnah. Bersih, terpercaya, dan menentramkan hati.</p>
   <div class="hero-cta">
-    <a href="#harga" class="btn-xl primary">🌸 Paket Aplikasi — Mulai Rp6.000/bln</a>
-    <a href="#fitur" class="btn-xl ghost">Lihat Fitur →</a>
+    <a href="#harga" class="btn-xl primary">Mulai Berlangganan — Rp6.000/bln</a>
+    <a href="#fitur" class="btn-xl ghost">Eksplorasi Fitur →</a>
   </div>
 </section>
 
@@ -1820,87 +1838,111 @@
   <div class="features-grid">
 
     <div class="feature-card reveal">
-      <div class="feature-icon">🎬</div>
+      <div class="feature-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+      </div>
       <div class="feature-tag">Video Pendek</div>
       <div class="feature-name">Tap Clipz</div>
-      <div class="feature-desc">Video pendek Islam yang asik untuk belajar agama secara santai dan cepat, cocok untuk Anda menemani setiap hari.</div>
+      <div class="feature-desc">Video ringkas berfaedah untuk belajar ilmu syar'i secara santai, padat, dan terverifikasi.</div>
     </div>
 
     <div class="feature-card reveal" style="transition-delay:0.05s">
-      <div class="feature-icon">💧</div>
+      <div class="feature-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+      </div>
       <div class="feature-tag">Menyentuh Hati</div>
       <div class="feature-name">Pisz</div>
-      <div class="feature-desc">Video yang mengingatkan dan menggerakkan hati Anda, dari konten yang membuat air mata jatuh karena keindahan keimanan.</div>
+      <div class="feature-desc">Tadabbur kisah dan nasehat spiritual yang menyegarkan keimanan dan melembutkan kalbu.</div>
     </div>
 
     <div class="feature-card reveal" style="transition-delay:0.1s">
-      <div class="feature-icon">📰</div>
-      <div class="feature-tag">Berita</div>
+      <div class="feature-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg>
+      </div>
+      <div class="feature-tag">Warta & Fakta</div>
       <div class="feature-name">Newz</div>
-      <div class="feature-desc">Berita terkini yang disajikan dengan batasan syariat Islam, sehingga menjadi informasi yang bermanfaat tanpa konten yang merusak.</div>
+      <div class="feature-desc">Kompilasi informasi global yang disaring ketat, bebas fitnah, dan selaras dengan batasan syariat.</div>
     </div>
 
     <div class="feature-card reveal" style="transition-delay:0.15s">
-      <div class="feature-icon">🧒</div>
-      <div class="feature-tag">Anak</div>
+      <div class="feature-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+      </div>
+      <div class="feature-tag">Generasi Madani</div>
       <div class="feature-name">Kidz</div>
-      <div class="feature-desc">Konten edukatif untuk anak-anak, tumbuhkan kecintaan pada belajar sejak dini dengan cara yang menyenangkan.</div>
+      <div class="feature-desc">Konten edukatif interaktif untuk menanamkan akhlak dan ketauhidan anak sejak usia dini.</div>
     </div>
 
     <div class="feature-card reveal" style="transition-delay:0.2s">
-      <div class="feature-icon">🧠</div>
-      <div class="feature-tag">Kuis</div>
+      <div class="feature-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      <div class="feature-tag">Evaluasi Ilmu</div>
       <div class="feature-name">Kuiz</div>
-      <div class="feature-desc">Uji pengetahuan Islam dan pengetahuan umum kamu lewat kuis interaktif yang mengasah wawasan setiap hari.</div>
+      <div class="feature-desc">Uji pemahaman wawasan keislaman dan sains melalui kuis terstruktur yang mengasah daya ingat.</div>
     </div>
 
     <div class="feature-card reveal" style="transition-delay:0.25s">
-      <div class="feature-icon">📺</div>
-      <div class="feature-tag">Streaming</div>
+      <div class="feature-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></svg>
+      </div>
+      <div class="feature-tag">Siaran Langsung</div>
       <div class="feature-name">TV</div>
-      <div class="feature-desc">Nikmati streaming kajian ulama, berita internasional dan hiburan, langsung di genggaman tanganmu.</div>
+      <div class="feature-desc">Akses streaming langsung kajian asatidzah terpercaya dan siaran ilmiah berkualitas tinggi.</div>
     </div>
 
     <div class="feature-card reveal" style="transition-delay:0.3s">
-      <div class="feature-icon">📅</div>
-      <div class="feature-tag">Kalender</div>
+      <div class="feature-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      </div>
+      <div class="feature-tag">Manajemen Waktu</div>
       <div class="feature-name">Kalender</div>
-      <div class="feature-desc">Kalender Masehi & Hijriyah lengkap dengan hari penting Islam, fitur menstruasi,catatan ringan harian dan masih banyak lainnya.</div>
+      <div class="feature-desc">Integrasi kalender Hijriyah & Masehi, jadwal puasa sunnah, agenda ibadah, dan catatan harian.</div>
     </div>
 
     <div class="feature-card reveal" style="transition-delay:0.35s">
-      <div class="feature-icon">✨</div>
-      <div class="feature-tag">Tiga AI Model</div>
+      <div class="feature-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </div>
+      <div class="feature-tag">Spesialis AI</div>
       <div class="feature-name">Tanya</div>
-      <div class="feature-desc">Tiga asisten AI cerdas: Cloud Sunnah (agama & hukum), Cloud Cendekia (ilmu pengetahuan), Cloud Sahabat (konseling mental).</div>
+      <div class="feature-desc">Tiga asisten cerdas: Cloud Sunnah (dalil/hukum), Cendekia (sains/kerja), dan Sahabat (konseling).</div>
     </div>
 
     <div class="feature-card reveal" style="transition-delay:0.4s">
-      <div class="feature-icon">📖</div>
-      <div class="feature-tag">Artikel</div>
+      <div class="feature-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      </div>
+      <div class="feature-tag">Khazanah Bacaan</div>
       <div class="feature-name">Readz</div>
-      <div class="feature-desc">Artikel Islam berkualitas yang memperdalam pemahaman agama sesuai Al-Qur'an dan Sunnah Rasulullah ﷺ.</div>
+      <div class="feature-desc">Artikel ilmiah komprehensif berlandaskan Al-Qur'an dan As-Sunnah sesuai pemahaman salafus shalih.</div>
     </div>
 
     <div class="feature-card reveal" style="transition-delay:0.45s">
-      <div class="feature-icon">🔬</div>
-      <div class="feature-tag">Penelitian</div>
+      <div class="feature-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/></svg>
+      </div>
+      <div class="feature-tag">Riset Ilmiah</div>
       <div class="feature-name">Risetz</div>
-      <div class="feature-desc">Artikel penelitian ilmiah internasional untuk memperluas wawasan dengan landasan yang kuat dan terpercaya.</div>
+      <div class="feature-desc">Rangkuman publikasi jurnal ilmiah internasional yang memperkuat wawasan akademis dan ketakwaan.</div>
     </div>
 
     <div class="feature-card reveal" style="transition-delay:0.5s">
-      <div class="feature-icon">🍳</div>
-      <div class="feature-tag">Masakan</div>
+      <div class="feature-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8Z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+      </div>
+      <div class="feature-tag">Kuliner Halal</div>
       <div class="feature-name">Cookz</div>
-      <div class="feature-desc">Konten masakan halal lezat, lengkap dengan resep, inspirasi menu, dan tips memasak yang sesuai dari ahlinya.</div>
+      <div class="feature-desc">Panduan resep halal, higienis (*thayyib*), dan tips memasak praktis untuk kesehatan keluarga.</div>
     </div>
 
-    <div class="feature-card reveal" style="transition-delay:0.55">
-      <div class="feature-icon"> 🛒</div>
+    <div class="feature-card reveal" style="transition-delay:0.55s">
+      <div class="feature-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      </div>
       <div class="feature-tag">Belanja</div>
       <div class="feature-name">Listz</div>
-      <div class="feature-desc">Membuat daftar belanja, menghitung kebutuhan rumah tangga dan data pengeluaran bulanan.</div>
+      <div class="feature-desc">Membuat daftar belanja terencana, menghitung kebutuhan rumah tangga dan estimasi pengeluaran bulanan.</div>
     </div>
 
   </div>
@@ -2215,7 +2257,7 @@
 		<li class="no">Prioritas konten terbaru</li>
 		<li class="no">Dukungan Exclusive anggota</li>
       </ul>
-      <a href="https://wa.me/6285648545159?text=Assalamu'alaikum%2C%20saya%20ingin%20berlangganan%20paket%20Premium%20IONA%20Rp5.000%2Fbulan%20🌸" target="_blank" class="pricing-cta cta-outline">Mulai Premium</a>
+      <a href="https://wa.me/6285648545159?text=Assalamu'alaikum%2C%20saya%20ingin%20berlangganan%20paket%20Premium%20IONA%20Rp6.000%2Fbulan" target="_blank" class="pricing-cta cta-outline">Mulai Premium</a>
     </div>
 
     <!-- EXCLUSIVE -->
@@ -2360,44 +2402,68 @@
     localStorage.setItem('iona-theme', dark ? 'dark' : 'light');
   });
 
-  // Mobile Menu
+  // Mobile Menu with Body Scroll Lock & Escape Key Handler
   const hamburger = document.getElementById('hamburger');
   const menu = document.getElementById('mobileMenu');
 
-  hamburger.addEventListener('click', () => {
-    menu.classList.toggle('open');
+  function toggleMobileMenu() {
+    const isOpen = menu.classList.toggle('open');
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+    hamburger.setAttribute('aria-expanded', String(isOpen));
+  }
+
+  hamburger.addEventListener('click', toggleMobileMenu);
+  hamburger.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleMobileMenu();
+    }
   });
 
   function closeMobile() {
     menu.classList.remove('open');
+    document.body.style.overflow = '';
+    hamburger.setAttribute('aria-expanded', 'false');
   }
 
-  // Scroll Reveal
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-  reveals.forEach(el => observer.observe(el));
-
-  // Smooth nav background on scroll
-  const nav = document.querySelector('nav');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      nav.style.boxShadow = 'var(--nav-shadow)';
-    } else {
-      nav.style.boxShadow = 'none';
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menu.classList.contains('open')) {
+      closeMobile();
     }
   });
 
+  // Scroll Reveal with Intersection Observer
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        obs.unobserve(e.target); // Unobserve to free up main thread
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
+
+  reveals.forEach(el => observer.observe(el));
+
+  // Passive Scroll Listener for Nav Shadow
+  const nav = document.querySelector('nav');
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        nav.style.boxShadow = window.scrollY > 40 ? 'var(--nav-shadow)' : 'none';
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
   // Compare AI Tab Switch
-  function switchCompareTab(tab) {
+  window.switchCompareTab = function(tab) {
     document.querySelectorAll('.ctab').forEach(t => t.classList.remove('active'));
-    document.querySelector(`.ctab[data-tab="${tab}"]`).classList.add('active');
+    const activeTab = document.querySelector(`.ctab[data-tab="${tab}"]`);
+    if (activeTab) activeTab.classList.add('active');
+
     ['sunnah', 'cendekia', 'sahabat'].forEach(model => {
       const show = tab === 'all' || tab === model;
       document.querySelectorAll(`.${model}-col`).forEach(el => {
@@ -2408,16 +2474,31 @@
       const show = tab === 'all' || card.dataset.model === tab || card.dataset.model === 'umum';
       card.style.display = show ? '' : 'none';
     });
-  }
+  };
 
-  // Parallax blobs
-  window.addEventListener('mousemove', (e) => {
-    const x = (e.clientX / window.innerWidth - 0.5) * 20;
-    const y = (e.clientY / window.innerHeight - 0.5) * 20;
-    document.querySelector('.blob-1').style.transform = `translate(${x}px, ${y}px)`;
-    document.querySelector('.blob-2').style.transform = `translate(${-x * 0.7}px, ${-y * 0.7}px)`;
-    document.querySelector('.blob-3').style.transform = `translate(${x * 0.4}px, ${y * 1.2}px)`;
-  });
+  // RAF-Throttled Parallax for High-End Displays (Disabled on Mobile/Touch)
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    let mouseX = 0, mouseY = 0;
+    let rafActive = false;
+    const b1 = document.querySelector('.blob-1');
+    const b2 = document.querySelector('.blob-2');
+    const b3 = document.querySelector('.blob-3');
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = (e.clientX / window.innerWidth - 0.5);
+      mouseY = (e.clientY / window.innerHeight - 0.5);
+
+      if (!rafActive) {
+        window.requestAnimationFrame(() => {
+          if (b1) b1.style.transform = `translate3d(${mouseX * 25}px, ${mouseY * 25}px, 0)`;
+          if (b2) b2.style.transform = `translate3d(${-mouseX * 18}px, ${-mouseY * 18}px, 0)`;
+          if (b3) b3.style.transform = `translate3d(${mouseX * 12}px, ${mouseY * 20}px, 0)`;
+          rafActive = false;
+        });
+        rafActive = true;
+      }
+    }, { passive: true });
+  }
   
 
   // ─── VIDEO INTRO: Lazy-load Facade (hemat kuota & anti-lag di hp kentang) ───
