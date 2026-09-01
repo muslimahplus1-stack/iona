@@ -91,10 +91,22 @@
   }
 
   [data-theme="light"] .nav-logo {
-    background: linear-gradient(135deg, var(--pink-500), var(--pink-700), var(--pink-900));
+    background: linear-gradient(
+      115deg,
+      var(--pink-600) 0%,
+      var(--pink-800) 18%,
+      var(--pink-500) 36%,
+      #ffffff 45%,
+      var(--pink-300) 52%,
+      var(--pink-700) 65%,
+      var(--pink-600) 82%,
+      var(--pink-800) 100%
+    );
+    background-size: 200% 100%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    filter: drop-shadow(0 0 6px rgba(217, 26, 98, 0.15));
   }
 
   [data-theme="light"] .hero-title span {
@@ -183,16 +195,60 @@
   }
   [data-theme="light"] nav { background: rgba(253, 250, 251, 0.8); }
 
- .nav-logo {
+  .nav-logo {
     font-family: 'Syne', sans-serif;
     font-weight: 800;
     font-size: 1.6rem;
-    letter-spacing: 0.12em;
-    background: linear-gradient(135deg, var(--pink-200), var(--pink-400), var(--pink-600));
+    letter-spacing: 0.14em;
+    background: linear-gradient(
+      115deg,
+      #ffadd0 0%,
+      #f72b78 18%,
+      #ffd6e7 36%,
+      #ffffff 45%,
+      #ffd6e7 52%,
+      #f72b78 65%,
+      #ffadd0 82%,
+      #f72b78 100%
+    );
+    background-size: 200% 100%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     text-decoration: none;
+    display: inline-block;
+    will-change: background-position, filter;
+    animation: liquidSilkShimmer 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    filter: drop-shadow(0 0 8px rgba(247, 43, 120, 0.25));
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), filter 0.3s ease;
+  }
+  .nav-logo:hover {
+    transform: scale(1.03);
+    filter: drop-shadow(0 0 18px rgba(247, 43, 120, 0.65)) drop-shadow(0 0 25px rgba(255, 255, 255, 0.4));
+  }
+
+  @keyframes liquidSilkShimmer {
+    0% {
+      background-position: 200% center;
+      filter: drop-shadow(0 0 6px rgba(247, 43, 120, 0.2));
+    }
+    38% {
+      background-position: 0% center;
+      filter: drop-shadow(0 0 16px rgba(255, 240, 245, 0.65)) drop-shadow(0 0 24px rgba(247, 43, 120, 0.45));
+    }
+    45% {
+      background-position: 0% center;
+      filter: drop-shadow(0 0 8px rgba(247, 43, 120, 0.25));
+    }
+    100% {
+      background-position: 0% center;
+      filter: drop-shadow(0 0 6px rgba(247, 43, 120, 0.2));
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .nav-logo {
+      animation: none !important;
+    }
   }
   .nav-links { display: flex; gap: 2rem; align-items: center; }
   .nav-links a {
@@ -1004,6 +1060,14 @@
     font-weight: 700;
     display: block;
     margin-bottom: 0.2rem;
+  }
+  .chat-bubble.right .premium {
+	color: black; /* atau color: #000000; */
+	font-size: 0.7rem;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 0.2rem;
+    opacity: 0.92; /* catat: opacity ini akan membuat hitamnya sedikit transparan */
   }
 
   /* Styling verified badge SVG */
@@ -2328,10 +2392,12 @@
       <span class="verified">Anggota Exclusive<svg class="verified-badge" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.15-.43.238-.89.238-1.37 0-2.206-1.794-4-4-4-.48 0-.94.088-1.37.238C14.568 2.505 13.197 1.63 11.617 1.63c-1.58 0-2.95.875-3.6 2.148-.43-.15-.89-.238-1.37-.238-2.206 0-4 1.794-4 4 0 .48.088.94.238 1.37C1.63 9.55 0.755 10.92 0.755 12.5c0 1.58.875 2.95 2.148 3.6-.15.43-.238.89-.238 1.37 0 2.206 1.794 4 4 4 .48 0 .94-.088 1.37-.238.652 1.273 2.023 2.148 3.603 2.148 1.58 0 2.95-.875 3.6-2.148.43.15.89.238 1.37.238 2.206 0 4-1.794 4-4 0-.48-.088-.94-.238-1.37 1.273-.652 2.148-2.023 2.148-3.603z" fill="#1D9BF0"/><path d="M9.75 16.25c-.256 0-.512-.098-.707-.293l-3.25-3.25c-.39-.39-.39-1.023 0-1.414s1.023-.39 1.414 0l2.543 2.543 6.343-6.343c.39-.39 1.023-.39 1.414 0s.39 1.023 0 1.414l-7.043 7.043c-.195.195-.45.293-.707.293z" fill="#FFFFFF"/></svg></span>
       Masya Allah, konten di IONA sangat membantu perjalanan hijrah saya 🌸
     </div>
-    <div class="chat-bubble right">
+	<div class="chat-bubble right">
+      <span class="premium">Anggota Premium</span>
       Alhamdulillah, semoga Allah mudahkan kita semua 🤲
     </div>
     <div class="chat-bubble left">
+	  <span class="verified">Anggota Exclusive<svg class="verified-badge" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.15-.43.238-.89.238-1.37 0-2.206-1.794-4-4-4-.48 0-.94.088-1.37.238C14.568 2.505 13.197 1.63 11.617 1.63c-1.58 0-2.95.875-3.6 2.148-.43-.15-.89-.238-1.37-.238-2.206 0-4 1.794-4 4 0 .48.088.94.238 1.37C1.63 9.55 0.755 10.92 0.755 12.5c0 1.58.875 2.95 2.148 3.6-.15.43-.238.89-.238 1.37 0 2.206 1.794 4 4 4 .48 0 .94-.088 1.37-.238.652 1.273 2.023 2.148 3.603 2.148 1.58 0 2.95-.875 3.6-2.148.43.15.89.238 1.37.238 2.206 0 4-1.794 4-4 0-.48-.088-.94-.238-1.37 1.273-.652 2.148-2.023 2.148-3.603z" fill="#1D9BF0"/><path d="M9.75 16.25c-.256 0-.512-.098-.707-.293l-3.25-3.25c-.39-.39-.39-1.023 0-1.414s1.023-.39 1.414 0l2.543 2.543 6.343-6.343c.39-.39 1.023-.39 1.414 0s.39 1.023 0 1.414l-7.043 7.043c-.195.195-.45.293-.707.293z" fill="#FFFFFF"/></svg></span>
       Konten Tap Clipz-nya singkat tapi dalem banget ilmunya!
     </div>
   </div>
